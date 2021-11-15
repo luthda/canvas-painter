@@ -21,8 +21,10 @@ namespace CanvasPainter.Handlers
             {
                 Canvas = Canvas.CreateFor((CreateCommand) command);
             }
-
-            Canvas = Canvas.Draw(command);
+            else
+            {
+                Canvas = Canvas.Draw(command);
+            }
             
             return Canvas.DrawBorder();
         }

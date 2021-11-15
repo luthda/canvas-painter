@@ -119,5 +119,58 @@ namespace CanvasPainter.Testing.Handlers
             // act & assert
             Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(rectangleCommand));
         }
+
+        [Fact]
+        public void HandleOn_FloodFillCommand_ReturnsDrawnCanvas()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "20", "4"};
+            var createCommand = new CreateCommand(inputParameters);
+            PaintHandler.HandleOn(createCommand);
+            
+            var inputFloodFillParameters = new string[] {"B", "20", "4", "o"};
+            var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
+            
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("----------------------");
+            stringBuilder.AppendLine("|oooooooooooooooooooo|");
+            stringBuilder.AppendLine("|oooooooooooooooooooo|");
+            stringBuilder.AppendLine("|oooooooooooooooooooo|");
+            stringBuilder.AppendLine("|oooooooooooooooooooo|");
+            stringBuilder.AppendLine("----------------------");
+            
+            // act
+            var actualCanvasString = PaintHandler.HandleOn(floodFillCommand);
+            
+            // assert
+            Assert.Equal(stringBuilder.ToString(), actualCanvasString);
+        }
+
+        [Fact]
+        public void HandleOn_InvalidFillCommand_DoesNothing()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "20", "4"};
+            var createCommand = new CreateCommand(inputParameters);
+            PaintHandler.HandleOn(createCommand);
+            
+            var inputFloodFillParameters = new string[] {"B", "20", "5", "o"};
+            var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
+            
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("----------------------");
+            stringBuilder.AppendLine("|                    |");
+            stringBuilder.AppendLine("|                    |");
+            stringBuilder.AppendLine("|                    |");
+            stringBuilder.AppendLine("|                    |");
+            stringBuilder.AppendLine("----------------------");
+            
+            // act
+            var actualCanvasString = PaintHandler.HandleOn(floodFillCommand);
+            
+            // assert
+            Assert.Equal(stringBuilder.ToString(), actualCanvasString);
+            
+        }
     }
 }

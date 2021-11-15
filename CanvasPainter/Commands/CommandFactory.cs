@@ -11,14 +11,19 @@ namespace CanvasPainter.Commands
             var commandChar = inputParameters.First().ToUpper();
 
             if (!Enum.TryParse(commandChar, out CommandType commandType))
+            {
                 throw new ArgumentException("This is not a valid command, choose: C, L, R, B or Q");
+            }
+                
 
             return commandType switch
             {
                 CommandType.C => new CreateCommand(inputParameters),
                 CommandType.L => new LineCommand(inputParameters),
                 CommandType.R => new RectangleCommand(inputParameters),
-                CommandType.Q => new QuitCommand(inputParameters)
+                CommandType.B => new FloodFillCommand(inputParameters),
+                CommandType.Q => new QuitCommand(inputParameters),
+                _ => throw new ArgumentOutOfRangeException(nameof(inputValues), "Choose command: C, L, R, B or Q")
             };
         }
     }

@@ -114,5 +114,18 @@ namespace CanvasPainter.Testing.Commands
             // assert
             Assert.Equal(typeof(RectangleCommand), rectangleCommand.GetType());
         }
+
+        [Fact]
+        public void CreateFor_TypeRWithValidParameters_ReturnsFloodFillCommand()
+        {
+            // arrange
+            var inputParameters = new string("B 20 4 o");
+            
+            // act
+            var floodFillCommand = CommandFactory.CreateFor(inputParameters);
+            
+            // assert
+            Assert.Equal(typeof(FloodFillCommand), floodFillCommand.GetType());
+        }
     }
 }

@@ -71,6 +71,12 @@ namespace CanvasPainter.Drawings
                 DrawRectangle(rectangleCommand.StartPoint, rectangleCommand.EndPoint);
             }
 
+            if (command.GetType() == typeof(FloodFillCommand))
+            {
+                var floodFillCommand = (FloodFillCommand) command;
+                FloodFill(floodFillCommand.ColorPoint, floodFillCommand.FillColor);
+            }
+
             return (Canvas) MemberwiseClone();
         }
 
@@ -111,14 +117,26 @@ namespace CanvasPainter.Drawings
 
         private void DrawHorizontalLine(Point startPoint, Point endPoint)
         {
-            if (startPoint.X >= endPoint.X) InsertXAxisLineColor(startPoint.Y, endPoint.X, startPoint.X);
-            else InsertXAxisLineColor(startPoint.Y, startPoint.X, endPoint.X);
+            if (startPoint.X >= endPoint.X)
+            {
+                InsertXAxisLineColor(startPoint.Y, endPoint.X, startPoint.X);
+            }
+            else
+            {
+                InsertXAxisLineColor(startPoint.Y, startPoint.X, endPoint.X);
+            }
         }
 
         private void DrawVerticalLine(Point startPoint, Point endPoint)
         {
-            if (startPoint.Y >= endPoint.Y) InsertYAxisLineColor(startPoint.X, endPoint.Y, startPoint.Y);
-            else InsertYAxisLineColor(startPoint.X, startPoint.Y, endPoint.Y);
+            if (startPoint.Y >= endPoint.Y)
+            {
+                InsertYAxisLineColor(startPoint.X, endPoint.Y, startPoint.Y);
+            }
+            else
+            {
+                InsertYAxisLineColor(startPoint.X, startPoint.Y, endPoint.Y);
+            }
         }
 
         private void InsertYAxisLineColor(int x, int lower, int upper)
