@@ -14,59 +14,82 @@ namespace CanvasPainter.Testing.Commands
         }
         
         [Fact]
-        public void CreateCommandFor_TypeCWithValidInputParameters_ReturnsCreateCommand()
+        public void CreateFor_TypeCWithValidInputParameters_ReturnsCreateCommand()
         {
             // arrange
             var inputParameters = new string("C 20 4");
             
             // act
-            var createCommand = CommandFactory.CreateCommandFor(inputParameters);
+            var createCommand = CommandFactory.CreateFor(inputParameters);
             
             // assert
             Assert.Equal(typeof(CreateCommand), createCommand.GetType());
         }
 
         [Fact]
-        public void CreateCommandFor_TypeCWithInvalidParameters_ThrowsArgumentException()
+        public void CreateFor_TypeCWithInvalidParameters_ThrowsArgumentException()
         {
             // arrange
             var inputParameters = new string("C 20 X");
             
             // act & assert
-            Assert.Throws<ArgumentException>(() => CommandFactory.CreateCommandFor(inputParameters));
+            Assert.Throws<ArgumentException>(() => CommandFactory.CreateFor(inputParameters));
         }
         
         [Fact]
-        public void CreateCommandFor_TypeCWithInvalidSize_ThrowsArgumentException()
+        public void CreateFor_TypeCWithInvalidSize_ThrowsArgumentException()
         {
             // arrange
             var inputParameters = new string("C 50 100");
             
             // act & assert
-            Assert.Throws<ArgumentException>(() => CommandFactory.CreateCommandFor(inputParameters));
+            Assert.Throws<ArgumentException>(() => CommandFactory.CreateFor(inputParameters));
         }
 
         [Fact]
-        public void CreateCommandFor_TypeQWithValidParameters_ReturnsQuitCommand()
+        public void CreateFor_TypeQWithValidParameters_ReturnsQuitCommand()
         {
             // arrange
             var inputParameters = new string("Q");
             
             // act
-            var quitCommand = CommandFactory.CreateCommandFor(inputParameters);
+            var quitCommand = CommandFactory.CreateFor(inputParameters);
             
             // assert
             Assert.Equal(typeof(QuitCommand), quitCommand.GetType());
         }
         
         [Fact]
-        public void CreateCommandFor_TypeQ_WithInvalidParameters_ThrowsArgumentException()
+        public void CreateFor_TypeQWithInvalidParameters_ThrowsArgumentException()
         {
             // arrange
             var inputParameters = new string("Q 100");
             
             // act & assert
-            Assert.Throws<ArgumentException>(() => CommandFactory.CreateCommandFor(inputParameters));
+            Assert.Throws<ArgumentException>(() => CommandFactory.CreateFor(inputParameters));
+        }
+
+        [Fact]
+        public void CreateFor_TypeLWithValidParameters_ReturnsLineCommand()
+        {
+            // arrange
+            var inputParameters = new string("L 1 2 6 2");
+            
+            // act
+            var lineCommand = CommandFactory.CreateFor(inputParameters);
+            
+            // assert
+            Assert.Equal(typeof(LineCommand), lineCommand.GetType());
+        }
+
+        [Fact]
+        public void CreateFor_TypeLWithInvalidParameters_ThrowsArgumentException()
+        {
+            // arrange
+            var inputParameters = new string("X 1 2 6 2");
+            
+            // act & assert
+            Assert.Throws<ArgumentException>(() => CommandFactory.CreateFor(inputParameters));
         }
     }
 }

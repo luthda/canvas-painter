@@ -9,7 +9,7 @@ namespace CanvasPainter.Testing.Commands
         private QuitCommand QuitCommand { get; set; }
         
         [Fact]
-        public void ValidateAndSetParameters_WithValidParameters_SetsQuitProp()
+        public void ValidateAndSetProperties_WithValidParameters_SetsQuitProp()
         {
             // arrange
             var inputParameters = new string[] {"Q"};
@@ -22,7 +22,7 @@ namespace CanvasPainter.Testing.Commands
         }
 
         [Fact]
-        public void ValidateAndSetParameters_WithInvalidParameters_ThrowsArgumentException()
+        public void ValidateAndSetProperties_WithInvalidParameters_ThrowsArgumentException()
         {
             // arrange
             var inputParameters = new string[] {"X", "5"};

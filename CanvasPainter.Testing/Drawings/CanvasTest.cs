@@ -17,7 +17,7 @@ namespace CanvasPainter.Testing.Drawings
             var inputParameters = new string[] {"C", "10", "9"};
 
             // act
-            Canvas = new Canvas(new CreateCommand(inputParameters));
+            Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
             // assert
             Assert.Equal(10, Canvas.Width);
@@ -30,7 +30,7 @@ namespace CanvasPainter.Testing.Drawings
         {
             // arrange
             var inputParameters = new string[] {"C", "4", "2"};
-            Canvas = new Canvas(new CreateCommand(inputParameters));
+            Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
             var expectedString = new StringBuilder();
             expectedString.AppendLine("------");
@@ -39,10 +39,10 @@ namespace CanvasPainter.Testing.Drawings
             expectedString.AppendLine("------");
 
             // act
-            var actualCanvas = Canvas.DrawBorder();
+            var actualCanvasString = Canvas.DrawBorder();
 
             // assert
-            Assert.Equal(actualCanvas, expectedString.ToString());
+            Assert.Equal(expectedString.ToString(), actualCanvasString);
         }
 
         [Fact]
@@ -52,9 +52,97 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = new EmptyCanvas();
             var inputParameters = new string[] {"C", "4", "2"};
             var command = new CreateCommand(inputParameters);
-            
+
             // act & assert
             Assert.ThrowsAny<ArgumentException>(() => Canvas.Draw(command));
+        }
+
+        [Fact]
+        public void DrawHorizontal_WithValidLineCommand_ReturnsDrawnCanvas()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "4", "2"};
+            Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
+            var inputLineParameters = new string[] {"L", "1", "1", "4", "1"};
+            var lineCommand = new LineCommand(inputLineParameters);
+
+            var expectedString = new StringBuilder();
+            expectedString.AppendLine("------");
+            expectedString.AppendLine("|xxxx|");
+            expectedString.AppendLine("|    |");
+            expectedString.AppendLine("------");
+
+            // act
+            var actualCanvasString = Canvas.Draw(lineCommand);
+
+            // assert
+            Assert.Equal(expectedString.ToString(), actualCanvasString);
+        }
+
+        [Fact]
+        public void DrawVertical_WithValidLineCommand_ReturnsDrawnCanvas()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "4", "2"};
+            Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
+            var inputLineParameters = new string[] {"L", "1", "1", "1", "2"};
+            var lineCommand = new LineCommand(inputLineParameters);
+
+            var expectedString = new StringBuilder();
+            expectedString.AppendLine("------");
+            expectedString.AppendLine("|x   |");
+            expectedString.AppendLine("|x   |");
+            expectedString.AppendLine("------");
+
+            // act
+            var actualCanvasString = Canvas.Draw(lineCommand);
+            
+            // assert
+            Assert.Equal(expectedString.ToString(), actualCanvasString);
+        }
+        
+        [Fact]
+        public void DrawHorizontalReverse_WithValidLineCommand_ReturnsDrawnCanvas()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "4", "2"};
+            Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
+            var inputLineParameters = new string[] {"L", "4", "1", "1", "1"};
+            var lineCommand = new LineCommand(inputLineParameters);
+
+            var expectedString = new StringBuilder();
+            expectedString.AppendLine("------");
+            expectedString.AppendLine("|xxxx|");
+            expectedString.AppendLine("|    |");
+            expectedString.AppendLine("------");
+
+            // act
+            var actualCanvasString = Canvas.Draw(lineCommand);
+
+            // assert
+            Assert.Equal(expectedString.ToString(), actualCanvasString);
+        }
+        
+        [Fact]
+        public void DrawVerticalReverse_WithValidLineCommand_ReturnsDrawnCanvas()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "4", "2"};
+            Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
+            var inputLineParameters = new string[] {"L", "1", "2", "1", "1"};
+            var lineCommand = new LineCommand(inputLineParameters);
+
+            var expectedString = new StringBuilder();
+            expectedString.AppendLine("------");
+            expectedString.AppendLine("|x   |");
+            expectedString.AppendLine("|x   |");
+            expectedString.AppendLine("------");
+
+            // act
+            var actualCanvasString = Canvas.Draw(lineCommand);
+            
+            // assert
+            Assert.Equal(expectedString.ToString(), actualCanvasString);
         }
     }
 }

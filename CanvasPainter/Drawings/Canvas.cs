@@ -12,7 +12,7 @@ namespace CanvasPainter.Drawings
         public int Height { get; private set; }
         public char[,] CanvasBody { get; set; }
 
-        public Canvas(CreateCommand command)
+        private Canvas(CreateCommand command)
         {
             Width = command.Width;
             Height = command.Height;
@@ -22,13 +22,18 @@ namespace CanvasPainter.Drawings
             {
                 for (int y = 1; y <= Height; y++)
                 {
-                    SetColorInCanvasBody(new Point(x, y), EmptyColor);
+                    SetColorFor(Point.CreateFor(x, y), EmptyColor);
                 }
             }
         }
 
         protected Canvas()
         {
+        }
+        
+        public static Canvas CreateFor(CreateCommand command)
+        {
+            return new Canvas(command);
         }
 
         public string DrawBorder()
@@ -42,7 +47,7 @@ namespace CanvasPainter.Drawings
                 stringBuilder.Append('|');
                 for (int x = 1; x <= Width; x++)
                 {
-                    stringBuilder.Append(GetFieldInCanvasBody(new Point(x, y)));
+                    stringBuilder.Append(GetValueAt(Point.CreateFor(x, y)));
                 }
 
                 stringBuilder.Append("|\n");
@@ -51,13 +56,14 @@ namespace CanvasPainter.Drawings
             stringBuilder.AppendLine(horizontalBorder);
             return stringBuilder.ToString();
         }
-        public char GetFieldInCanvasBody(Point point)
-        {
-            return CanvasBody[point.X - 1, point.Y - 1];
-        }
-        
+
         public virtual string Draw(ICommand command)
         {
+            if (command.GetType() == typeof(LineCommand))
+            {
+                var lineCommand = (LineCommand) command;
+                DrawLine(lineCommand.StartPoint, lineCommand.EndPoint);
+            }
             return DrawBorder();
         }
 
@@ -75,58 +81,63 @@ namespace CanvasPainter.Drawings
 
         private void DrawRectangle(Point startPoint, Point endPoint)
         {
-            DrawLine(startPoint, new Point(endPoint.X, startPoint.Y));
-            DrawLine(new Point(startPoint.X, endPoint.Y), endPoint);
-            DrawLine(startPoint, new Point(startPoint.X, endPoint.Y));
-            DrawLine(new Point(endPoint.X, startPoint.Y), endPoint);
+            DrawLine(startPoint, Point.CreateFor(endPoint.X, startPoint.Y));
+            DrawLine(Point.CreateFor(startPoint.X, endPoint.Y), endPoint);
+            DrawLine(startPoint, Point.CreateFor(startPoint.X, endPoint.Y));
+            DrawLine(Point.CreateFor(endPoint.X, startPoint.Y), endPoint);
         }
 
-        private void ColorizeCanvasBody(Point point, char fillColorChar)
+        private void FloodFill(Point point, char fillColorChar)
         {
-            if (!point.IsPointInBodyRange(Width, Height) || GetFieldInCanvasBody(point) != EmptyColor)
+            if (!point.IsPointInBodyRange(Width, Height) || GetValueAt(point) != EmptyColor)
             {
                 return;
             }
 
-            SetColorInCanvasBody(point, fillColorChar);
+            SetColorFor(point, fillColorChar);
 
-            ColorizeCanvasBody(new Point(point.X, point.Y - 1), fillColorChar);
-            ColorizeCanvasBody(new Point(point.X, point.Y + 1), fillColorChar);
-            ColorizeCanvasBody(new Point(point.X - 1, point.Y), fillColorChar);
-            ColorizeCanvasBody(new Point(point.X + 1, point.Y), fillColorChar);
-        }
-
-        private void SetColorInCanvasBody(Point point, char color)
-        {
-            CanvasBody[point.X - 1, point.Y - 1] = color;
+            FloodFill(Point.CreateFor(point.X, point.Y - 1), fillColorChar);
+            FloodFill(Point.CreateFor(point.X, point.Y + 1), fillColorChar);
+            FloodFill(Point.CreateFor(point.X - 1, point.Y), fillColorChar);
+            FloodFill(Point.CreateFor(point.X + 1, point.Y), fillColorChar);
         }
 
         private void DrawHorizontalLine(Point startPoint, Point endPoint)
         {
-            if (startPoint.X >= endPoint.X) InsertXAxisLineSymbol(startPoint.Y, endPoint.X, startPoint.X);
-            else InsertXAxisLineSymbol(startPoint.Y, startPoint.X, endPoint.X);
+            if (startPoint.X >= endPoint.X) InsertXAxisLineColor(startPoint.Y, endPoint.X, startPoint.X);
+            else InsertXAxisLineColor(startPoint.Y, startPoint.X, endPoint.X);
         }
 
         private void DrawVerticalLine(Point startPoint, Point endPoint)
         {
-            if (startPoint.Y >= endPoint.Y) InsertYAxisLineSymbol(startPoint.X, endPoint.Y, startPoint.Y);
-            else InsertYAxisLineSymbol(startPoint.X, startPoint.Y, endPoint.Y);
+            if (startPoint.Y >= endPoint.Y) InsertYAxisLineColor(startPoint.X, endPoint.Y, startPoint.Y);
+            else InsertYAxisLineColor(startPoint.X, startPoint.Y, endPoint.Y);
         }
 
-        private void InsertYAxisLineSymbol(int x, int lower, int upper)
+        private void InsertYAxisLineColor(int x, int lower, int upper)
         {
             for (int i = lower; i <= upper; i++)
             {
-                SetColorInCanvasBody(new Point(x, i), LineColor);
+                SetColorFor(Point.CreateFor(x, i), LineColor);
             }
         }
 
-        private void InsertXAxisLineSymbol(int y, int lower, int upper)
+        private void InsertXAxisLineColor(int y, int lower, int upper)
         {
             for (int i = lower; i <= upper; i++)
             {
-                SetColorInCanvasBody(new Point(i, y), LineColor);
+                SetColorFor(Point.CreateFor(i, y), LineColor);
             }
+        }
+        
+        private char GetValueAt(Point point)
+        {
+            return CanvasBody[point.X - 1, point.Y - 1];
+        }
+        
+        private void SetColorFor(Point point, char color)
+        {
+            CanvasBody[point.X - 1, point.Y - 1] = color;
         }
     }
 }

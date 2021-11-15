@@ -5,7 +5,7 @@ namespace CanvasPainter.Commands
 {
     public class CommandFactory
     {
-        public ICommand CreateCommandFor(string inputValues)
+        public static ICommand CreateFor(string inputValues)
         {
             var inputParameters = inputValues.Split(" ");
             var commandChar = inputParameters.First().ToUpper();
@@ -16,6 +16,7 @@ namespace CanvasPainter.Commands
             return commandType switch
             {
                 CommandType.C => new CreateCommand(inputParameters),
+                CommandType.L => new LineCommand(inputParameters),
                 CommandType.Q => new QuitCommand(inputParameters)
             };
         }

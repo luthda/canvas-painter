@@ -11,7 +11,6 @@ namespace CanvasPainter.Applications
         private readonly IApplicationConsole _applicationConsole;
         private readonly IHandler _paintHandler;
         private readonly QuitHandler _quiteHandler;
-        private readonly CommandFactory _commandFactory;
         private bool IsQuit { get; set; }
 
         public Application()
@@ -19,7 +18,6 @@ namespace CanvasPainter.Applications
             _applicationConsole = new ApplicationConsole();
             _paintHandler = new PaintHandler();
             _quiteHandler = new QuitHandler();
-            _commandFactory = new CommandFactory();
             IsQuit = false;
         }
 
@@ -32,7 +30,7 @@ namespace CanvasPainter.Applications
                 {
                     _applicationConsole.Write("Enter Commands: ");
                     var inputValues = _applicationConsole.ReadLine();
-                    var command = _commandFactory.CreateCommandFor(inputValues);
+                    var command = CommandFactory.CreateFor(inputValues);
                     if (command.GetType() == typeof(QuitCommand))
                     {
                         IsQuit = _quiteHandler.HandleQuit((QuitCommand) command);

@@ -12,15 +12,15 @@ namespace CanvasPainter.Commands
 
         public CreateCommand(string[] inputParameters)
         {
-            ValidateAndSetParameters(inputParameters);
+            ValidateAndSetProperties(inputParameters);
         }
 
-        public void ValidateAndSetParameters(string[] inputParameters)
+        public void ValidateAndSetProperties(string[] inputParameters)
         {
             if (!(inputParameters.Length == 3 && int.TryParse(inputParameters[1], out int width) &&
                   int.TryParse(inputParameters[2], out int height)))
                 throw new ArgumentException("Create command needs 3 parameters: C width height (only integer allowed)");
-            
+
             if (width < LowerLimit || width > UpperLimit && height < LowerLimit || height > UpperLimit)
                 throw new ArgumentException("Size limits: Min = 1, Max = 50");
 

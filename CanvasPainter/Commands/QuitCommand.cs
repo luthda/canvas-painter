@@ -8,10 +8,10 @@ namespace CanvasPainter.Commands
 
         public QuitCommand(string[] inputParameters)
         {
-            ValidateAndSetParameters(inputParameters);
+            ValidateAndSetProperties(inputParameters);
         }
         
-        public void ValidateAndSetParameters(string[] inputParameters)
+        public void ValidateAndSetProperties(string[] inputParameters)
         {
             if (inputParameters.Length == 1)
             {

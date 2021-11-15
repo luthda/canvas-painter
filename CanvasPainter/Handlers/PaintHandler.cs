@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using CanvasPainter.Commands;
 using CanvasPainter.Drawings;
 
@@ -18,8 +19,13 @@ namespace CanvasPainter.Handlers
         {
             if (command.GetType() == typeof(CreateCommand))
             {
-                Canvas = new Canvas((CreateCommand) command);
+                Canvas = Canvas.CreateFor((CreateCommand) command);
                 return Canvas.DrawBorder();
+            }
+
+            if (command.GetType() == typeof(LineCommand))
+            {
+                return Canvas.Draw((LineCommand) command);
             }
 
             throw new ArgumentException("Not a command");
