@@ -91,5 +91,28 @@ namespace CanvasPainter.Testing.Commands
             // act & assert
             Assert.Throws<ArgumentException>(() => CommandFactory.CreateFor(inputParameters));
         }
+        
+        [Fact]
+        public void CreateFor_TypeLWithNotStraightParameters_ThrowsArgumentException()
+        {
+            // arrange
+            var inputParameters = new string("L 1 2 6 3");
+            
+            // act & assert
+            Assert.Throws<ArgumentException>(() => CommandFactory.CreateFor(inputParameters));
+        }
+
+        [Fact]
+        public void CreateFor_TypeRWithValidParameters_ReturnsRectangleCommand()
+        {
+            // arrange
+            var inputParameters = new string("R 14 1 18 3");
+            
+            // act
+            var rectangleCommand = CommandFactory.CreateFor(inputParameters);
+            
+            // assert
+            Assert.Equal(typeof(RectangleCommand), rectangleCommand.GetType());
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace CanvasPainter.Commands
             {
                 CommandType.C => new CreateCommand(inputParameters),
                 CommandType.L => new LineCommand(inputParameters),
+                CommandType.R => new RectangleCommand(inputParameters),
                 CommandType.Q => new QuitCommand(inputParameters)
             };
         }

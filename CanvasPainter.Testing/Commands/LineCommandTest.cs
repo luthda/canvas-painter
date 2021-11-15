@@ -17,6 +17,7 @@ namespace CanvasPainter.Testing.Commands
             // act
             LineCommand = new LineCommand(inputParameters);
             
+            // assert
             Assert.Equal(1,LineCommand.StartPoint.X);
             Assert.Equal(6,LineCommand.EndPoint.X);
             Assert.Equal(2,LineCommand.StartPoint.Y);

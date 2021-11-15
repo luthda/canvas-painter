@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using CanvasPainter.Commands;
+using CanvasPainter.Drawings;
 using CanvasPainter.Handlers;
 using Xunit;
 
@@ -14,7 +15,7 @@ namespace CanvasPainter.Testing.Handlers
         {
             PaintHandler = new PaintHandler();
         }
-        
+
         [Fact]
         public void HandleOn_CreateCommand_ReturnsDrawnCanvas()
         {
@@ -32,20 +33,9 @@ namespace CanvasPainter.Testing.Handlers
 
             // act
             var actualCanvasString = PaintHandler.HandleOn(createCommand);
-            
+
             // assert
             Assert.Equal(stringBuilder.ToString(), actualCanvasString);
-        }
-
-        [Fact]
-        public void HandleOn_InvalidCommand_ThrowsArgumentException()
-        {
-            // arrange
-            var inputParameters = new string[] {"Q"};
-            var quitCommand = new QuitCommand(inputParameters);
-            
-            // act & assert
-            Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(quitCommand));
         }
 
         [Fact]
@@ -55,11 +45,10 @@ namespace CanvasPainter.Testing.Handlers
             var inputParameters = new string[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
             PaintHandler.HandleOn(createCommand);
-            
+
             var inputLineParameters = new string[] {"L", "1", "2", "6", "2"};
             var lineCommand = new LineCommand(inputLineParameters);
-     
-
+            
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
             stringBuilder.AppendLine("|                    |");
@@ -67,12 +56,68 @@ namespace CanvasPainter.Testing.Handlers
             stringBuilder.AppendLine("|                    |");
             stringBuilder.AppendLine("|                    |");
             stringBuilder.AppendLine("----------------------");
-            
+
             // act
             var actualCanvasString = PaintHandler.HandleOn(lineCommand);
-            
+
             // assert
             Assert.Equal(stringBuilder.ToString(), actualCanvasString);
+        }
+
+        [Fact]
+        public void HandleOn_InvalidLineParameter_ThrowsArgumentException()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "20", "4"};
+            var createCommand = new CreateCommand(inputParameters);
+            PaintHandler.HandleOn(createCommand);
+
+            var inputLineParameters = new string[] {"L", "30", "2", "6", "2"};
+            var lineCommand = new LineCommand(inputLineParameters);
+            
+            // act & assert
+            Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(lineCommand));
+        }
+
+        [Fact]
+        public void HandleOn_RectangleCommand_ReturnsDrawnCanvas()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "20", "4"};
+            var createCommand = new CreateCommand(inputParameters);
+            PaintHandler.HandleOn(createCommand);
+            
+            var rectangleParameters = new string[] {"R", "14", "1", "18", "3"};
+            var rectangleCommand = new RectangleCommand(rectangleParameters);
+            
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("----------------------");
+            stringBuilder.AppendLine("|             xxxxx  |");
+            stringBuilder.AppendLine("|             x   x  |");
+            stringBuilder.AppendLine("|             xxxxx  |");
+            stringBuilder.AppendLine("|                    |");
+            stringBuilder.AppendLine("----------------------");
+            
+            // act
+            var actualCanvasString = PaintHandler.HandleOn(rectangleCommand);
+
+            // assert
+            Assert.Equal(stringBuilder.ToString(), actualCanvasString);
+        }
+
+        [Fact]
+        public void HandleOn_InvalidRectangleCommand_ThrowsArgumentException()
+        {
+            // arrange
+            var inputParameters = new string[] {"C", "20", "4"};
+            var createCommand = new CreateCommand(inputParameters);
+            PaintHandler.HandleOn(createCommand);
+            
+            var inputLineParameters = new string[] {"R", "30", "1", "18", "3"};
+            var rectangleCommand = new RectangleCommand(inputLineParameters);
+            
+            // act & assert
+            Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(rectangleCommand));
         }
     }
 }

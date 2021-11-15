@@ -20,15 +20,11 @@ namespace CanvasPainter.Handlers
             if (command.GetType() == typeof(CreateCommand))
             {
                 Canvas = Canvas.CreateFor((CreateCommand) command);
-                return Canvas.DrawBorder();
             }
 
-            if (command.GetType() == typeof(LineCommand))
-            {
-                return Canvas.Draw((LineCommand) command);
-            }
-
-            throw new ArgumentException("Not a command");
+            Canvas = Canvas.Draw(command);
+            
+            return Canvas.DrawBorder();
         }
     }
 }

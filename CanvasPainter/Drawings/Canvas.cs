@@ -8,9 +8,9 @@ namespace CanvasPainter.Drawings
     {
         private const char EmptyColor = ' ';
         private const char LineColor = 'x';
-        public int Width { get; private set; }
-        public int Height { get; private set; }
-        public char[,] CanvasBody { get; set; }
+        public int Width { get; }
+        public int Height { get; }
+        public char[,] CanvasBody { get; }
 
         private Canvas(CreateCommand command)
         {
@@ -47,7 +47,7 @@ namespace CanvasPainter.Drawings
                 stringBuilder.Append('|');
                 for (int x = 1; x <= Width; x++)
                 {
-                    stringBuilder.Append(GetValueAt(Point.CreateFor(x, y)));
+                    stringBuilder.Append(GetColorAt(Point.CreateFor(x, y)));
                 }
 
                 stringBuilder.Append("|\n");
@@ -57,14 +57,21 @@ namespace CanvasPainter.Drawings
             return stringBuilder.ToString();
         }
 
-        public virtual string Draw(ICommand command)
+        public virtual Canvas Draw(ICommand command)
         {
             if (command.GetType() == typeof(LineCommand))
             {
                 var lineCommand = (LineCommand) command;
                 DrawLine(lineCommand.StartPoint, lineCommand.EndPoint);
             }
-            return DrawBorder();
+
+            if (command.GetType() == typeof(RectangleCommand))
+            {
+                var rectangleCommand = (RectangleCommand) command;
+                DrawRectangle(rectangleCommand.StartPoint, rectangleCommand.EndPoint);
+            }
+
+            return (Canvas) MemberwiseClone();
         }
 
         private void DrawLine(Point startPoint, Point endPoint)
@@ -89,7 +96,7 @@ namespace CanvasPainter.Drawings
 
         private void FloodFill(Point point, char fillColorChar)
         {
-            if (!point.IsPointInBodyRange(Width, Height) || GetValueAt(point) != EmptyColor)
+            if (!point.IsPointInBodyRange(Width, Height) || GetColorAt(point) != EmptyColor)
             {
                 return;
             }
@@ -130,7 +137,7 @@ namespace CanvasPainter.Drawings
             }
         }
         
-        private char GetValueAt(Point point)
+        private char GetColorAt(Point point)
         {
             return CanvasBody[point.X - 1, point.Y - 1];
         }
