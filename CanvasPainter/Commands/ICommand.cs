@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+
 namespace CanvasPainter.Commands
 {
     public interface ICommand
     {
-        public void Validate();
+        public void ValidateAndSetParameters(string[] inputParameters);
     }
 }
