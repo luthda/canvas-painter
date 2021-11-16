@@ -9,15 +9,12 @@ namespace CanvasPainter.Testing
     public class IntegrationTest
     {
         private readonly IHandler _paintHandler;
-        private readonly QuitHandler _quiteHandler;
-        public string Canvas { get; set; }
-        private bool IsQuit { get; set; }
+        private string Canvas { get; set; }
 
         public IntegrationTest()
         {
             _paintHandler = new PaintHandler();
             _quiteHandler = new QuitHandler();
-            IsQuit = false;
         }
 
         [Fact]
