@@ -21,7 +21,7 @@ namespace CanvasPainter.Testing
         }
 
         [Fact]
-        public void IntegrationTest_ForScenarios_DarwsCanvas()
+        public void IntegrationTest_ForScenarios_DrawsCanvas()
         {
             // arrange
             var inputValues = new string("C 20 4");
