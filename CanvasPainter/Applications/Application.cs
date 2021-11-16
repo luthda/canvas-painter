@@ -9,14 +9,14 @@ namespace CanvasPainter.Applications
     {
         private readonly IApplicationConsole _applicationConsole;
         private readonly IHandler _paintHandler;
-        private readonly QuitHandler _quiteHandler;
+        private readonly QuitHandler _quitHandler;
         private bool IsQuit { get; set; }
 
         public Application()
         {
             _applicationConsole = new ApplicationConsole();
             _paintHandler = new PaintHandler();
-            _quiteHandler = new QuitHandler();
+            _quitHandler = new QuitHandler();
             IsQuit = false;
         }
 
@@ -32,7 +32,7 @@ namespace CanvasPainter.Applications
                     var command = CommandFactory.CreateFor(inputValues);
                     if (command.GetType() == typeof(QuitCommand))
                     {
-                        IsQuit = _quiteHandler.HandleQuit((QuitCommand) command);
+                        IsQuit = _quitHandler.HandleQuit((QuitCommand) command);
                     }
                     else _applicationConsole.Write(_paintHandler.HandleOn(command));
                 }
