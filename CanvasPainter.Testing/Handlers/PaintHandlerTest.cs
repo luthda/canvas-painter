@@ -9,7 +9,7 @@ namespace CanvasPainter.Testing.Handlers
 {
     public class PaintHandlerTest
     {
-        public PaintHandler PaintHandler { get; set; }
+        private PaintHandler PaintHandler { get; set; }
 
         public PaintHandlerTest()
         {

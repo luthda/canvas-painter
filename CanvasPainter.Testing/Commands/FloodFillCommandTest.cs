@@ -1,12 +1,13 @@
 using System;
 using CanvasPainter.Commands;
+using CanvasPainter.Exceptions;
 using Xunit;
 
 namespace CanvasPainter.Testing.Commands
 {
     public class FloodFillCommandTest
     {
-        public FloodFillCommand FloodFillCommand { get; set; }
+        private FloodFillCommand FloodFillCommand { get; set; }
 
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
@@ -22,25 +23,25 @@ namespace CanvasPainter.Testing.Commands
             Assert.Equal(3, FloodFillCommand.ColorPoint.Y);
             Assert.Equal('o', FloodFillCommand.FillColor);
         }
-        
+
         [Fact]
-        public void ValidateAndSetProperties_WithInvalidParameters_ThrowsArgumentException()
+        public void ValidateAndSetProperties_WithInvalidParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[]{"B", "10", "2", "630"};
-            
+            var inputParameters = new string[] {"B", "10", "2", "630"};
+
             // act & assert
-            Assert.Throws<ArgumentException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));
+            Assert.Throws<ValidationException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));
         }
-        
+
         [Fact]
-        public void ValidateAndSetProperties_WithTooShortParameters_ThrowsArgumentException()
+        public void ValidateAndSetProperties_WithTooShortParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[]{"B", "10", "2"};
-            
+            var inputParameters = new string[] {"B", "10", "2"};
+
             // act & assert
-            Assert.Throws<ArgumentException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));
+            Assert.Throws<ValidationException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));
         }
     }
 }

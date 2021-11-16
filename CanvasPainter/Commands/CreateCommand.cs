@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Commands
 {
@@ -20,14 +21,14 @@ namespace CanvasPainter.Commands
             if (!(inputParameters.Length == 3 && int.TryParse(inputParameters[1], out int width) &&
                   int.TryParse(inputParameters[2], out int height)))
             {
-                throw new ArgumentException("Create command needs 3 parameters: C width height (only integer allowed)");
+                throw ValidationException.CreateInstance();
             }
 
             if (width < LowerLimit || width > UpperLimit && height < LowerLimit || height > UpperLimit)
             {
-                throw new ArgumentException("Size limits: Min = 1, Max = 50");
+                throw ValidationException.CreateInstance();
             }
-            
+
             Width = width;
             Height = height;
         }

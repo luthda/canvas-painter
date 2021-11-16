@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using CanvasPainter.Commands;
 using CanvasPainter.Drawings;
+using CanvasPainter.Exceptions;
 using Xunit;
 
 namespace CanvasPainter.Testing.Drawings
@@ -46,7 +47,7 @@ namespace CanvasPainter.Testing.Drawings
         }
 
         [Fact]
-        public void HandleEmptyCanvas_WithInvalidParameters_ThrowsArgumentException()
+        public void HandleEmptyCanvas_WithInvalidParameters_ThrowsCommandException()
         {
             // arrange
             Canvas = new EmptyCanvas();
@@ -54,7 +55,7 @@ namespace CanvasPainter.Testing.Drawings
             var command = new CreateCommand(inputParameters);
 
             // act & assert
-            Assert.ThrowsAny<ArgumentException>(() => Canvas.Draw(command));
+            Assert.ThrowsAny<CommandException>(() => Canvas.Draw(command));
         }
 
         [Fact]
@@ -63,7 +64,7 @@ namespace CanvasPainter.Testing.Drawings
             // arrange
             var inputParameters = new string[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            
+
             var inputLineParameters = new string[] {"L", "1", "1", "4", "1"};
             var lineCommand = new LineCommand(inputLineParameters);
 
@@ -86,7 +87,7 @@ namespace CanvasPainter.Testing.Drawings
             // arrange
             var inputParameters = new string[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            
+
             var inputLineParameters = new string[] {"L", "1", "1", "1", "2"};
             var lineCommand = new LineCommand(inputLineParameters);
 
@@ -102,14 +103,14 @@ namespace CanvasPainter.Testing.Drawings
             // assert
             Assert.Equal(expectedString.ToString(), Canvas.DrawBorder());
         }
-        
+
         [Fact]
         public void DrawHorizontalReverse_WithValidLineCommand_ReturnsCanvas()
         {
             // arrange
             var inputParameters = new string[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            
+
             var inputLineParameters = new string[] {"L", "4", "1", "1", "1"};
             var lineCommand = new LineCommand(inputLineParameters);
 
@@ -125,14 +126,14 @@ namespace CanvasPainter.Testing.Drawings
             // assert
             Assert.Equal(expectedString.ToString(), Canvas.DrawBorder());
         }
-        
+
         [Fact]
         public void DrawVerticalReverse_WithValidLineCommand_ReturnsCanvas()
         {
             // arrange
             var inputParameters = new string[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            
+
             var inputLineParameters = new string[] {"L", "1", "2", "1", "1"};
             var lineCommand = new LineCommand(inputLineParameters);
 
@@ -155,10 +156,10 @@ namespace CanvasPainter.Testing.Drawings
             // arrange
             var inputParameters = new string[] {"C", "20", "4"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            
+
             var rectangleParameters = new string[] {"R", "14", "1", "18", "3"};
             var rectangleCommand = new RectangleCommand(rectangleParameters);
-            
+
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
             stringBuilder.AppendLine("|             xxxxx  |");
@@ -166,13 +167,12 @@ namespace CanvasPainter.Testing.Drawings
             stringBuilder.AppendLine("|             xxxxx  |");
             stringBuilder.AppendLine("|                    |");
             stringBuilder.AppendLine("----------------------");
-            
+
             // act
             Canvas = Canvas.Draw(rectangleCommand);
-            
+
             // assert
             Assert.Equal(stringBuilder.ToString(), Canvas.DrawBorder());
-
         }
 
         [Fact]
@@ -183,7 +183,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
             var inputRectangleParameters = new string[] {"R", "30", "1", "18", "3"};
             var rectangleCommand = new RectangleCommand(inputRectangleParameters);
-            
+
             // act & assert
             Assert.Throws<ArgumentException>(() => Canvas.Draw(rectangleCommand));
         }
@@ -196,7 +196,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
             var inputFloodFillParameters = new string[] {"B", "20", "4", "o"};
             var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
-            
+
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
             stringBuilder.AppendLine("|oooooooooooooooooooo|");
@@ -204,14 +204,14 @@ namespace CanvasPainter.Testing.Drawings
             stringBuilder.AppendLine("|oooooooooooooooooooo|");
             stringBuilder.AppendLine("|oooooooooooooooooooo|");
             stringBuilder.AppendLine("----------------------");
-            
+
             // act
             Canvas = Canvas.Draw(floodFillCommand);
-            
+
             // assert
             Assert.Equal(stringBuilder.ToString(), Canvas.DrawBorder());
         }
-        
+
         [Fact]
         public void DrawFloodFill_WithInvalidFloodFillCommand_DoesNothing()
         {
@@ -220,7 +220,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
             var inputFloodFillParameters = new string[] {"B", "20", "5", "o"};
             var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
-            
+
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
             stringBuilder.AppendLine("|                    |");
@@ -228,10 +228,10 @@ namespace CanvasPainter.Testing.Drawings
             stringBuilder.AppendLine("|                    |");
             stringBuilder.AppendLine("|                    |");
             stringBuilder.AppendLine("----------------------");
-            
+
             // act
             Canvas = Canvas.Draw(floodFillCommand);
-            
+
             // assert
             Assert.Equal(stringBuilder.ToString(), Canvas.DrawBorder());
         }

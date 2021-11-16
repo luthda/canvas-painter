@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Commands
 {
@@ -12,9 +13,8 @@ namespace CanvasPainter.Commands
 
             if (!Enum.TryParse(commandChar, out CommandType commandType))
             {
-                throw new ArgumentException("This is not a valid command, choose: C, L, R, B or Q");
+                throw CommandException.CreateInstance();
             }
-                
 
             return commandType switch
             {
@@ -23,7 +23,7 @@ namespace CanvasPainter.Commands
                 CommandType.R => new RectangleCommand(inputParameters),
                 CommandType.B => new FloodFillCommand(inputParameters),
                 CommandType.Q => new QuitCommand(inputParameters),
-                _ => throw new ArgumentOutOfRangeException(nameof(inputValues), "Choose command: C, L, R, B or Q")
+                _ => throw CommandException.CreateInstance()
             };
         }
     }

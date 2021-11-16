@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using CanvasPainter.Commands;
 using CanvasPainter.Drawings;
 
@@ -25,7 +22,7 @@ namespace CanvasPainter.Handlers
             {
                 Canvas = Canvas.Draw(command);
             }
-            
+
             return Canvas.DrawBorder();
         }
     }

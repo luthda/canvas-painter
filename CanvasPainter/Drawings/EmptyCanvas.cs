@@ -1,5 +1,6 @@
 using System;
 using CanvasPainter.Commands;
+using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Drawings
 {
@@ -7,7 +8,7 @@ namespace CanvasPainter.Drawings
     {
         public override Canvas Draw(ICommand command)
         {
-            throw new ArgumentException("Create a canvas first: C width, height");
+            throw new CommandException();
         }
     }
 }

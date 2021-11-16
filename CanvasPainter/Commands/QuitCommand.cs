@@ -1,4 +1,5 @@
 using System;
+using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Commands
 {
@@ -10,7 +11,7 @@ namespace CanvasPainter.Commands
         {
             ValidateAndSetProperties(inputParameters);
         }
-        
+
         public void ValidateAndSetProperties(string[] inputParameters)
         {
             if (inputParameters.Length == 1)
@@ -19,7 +20,7 @@ namespace CanvasPainter.Commands
             }
             else
             {
-                throw new ArgumentException("Quit command, only has one parameter");
+                throw ValidationException.CreateInstance();
             }
         }
     }

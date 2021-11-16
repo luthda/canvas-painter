@@ -1,5 +1,6 @@
 using System;
 using CanvasPainter.Commands;
+using CanvasPainter.Exceptions;
 using Xunit;
 
 namespace CanvasPainter.Testing.Commands
@@ -23,15 +24,15 @@ namespace CanvasPainter.Testing.Commands
             Assert.Equal(1, RectangleCommand.StartPoint.Y);
             Assert.Equal(3, RectangleCommand.EndPoint.Y);
         }
-        
+
         [Fact]
-        public void ValidateAndSetProperties_WithInvalidParameters_ThrowsArgumentException()
+        public void ValidateAndSetProperties_WithInvalidParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[]{"R", "1", "2", "6"};
-            
+            var inputParameters = new string[] {"R", "1", "2", "6"};
+
             // act & assert
-            Assert.Throws<ArgumentException>(() => RectangleCommand = new RectangleCommand(inputParameters));
+            Assert.Throws<ValidationException>(() => RectangleCommand = new RectangleCommand(inputParameters));
         }
     }
 }

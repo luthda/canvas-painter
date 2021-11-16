@@ -30,7 +30,7 @@ namespace CanvasPainter.Drawings
         protected Canvas()
         {
         }
-        
+
         public static Canvas CreateFor(CreateCommand command)
         {
             return new Canvas(command);
@@ -154,12 +154,12 @@ namespace CanvasPainter.Drawings
                 SetColorFor(Point.CreateFor(i, y), LineColor);
             }
         }
-        
+
         private char GetColorAt(Point point)
         {
             return CanvasBody[point.X - 1, point.Y - 1];
         }
-        
+
         private void SetColorFor(Point point, char color)
         {
             CanvasBody[point.X - 1, point.Y - 1] = color;

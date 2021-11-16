@@ -1,5 +1,6 @@
 using System;
 using CanvasPainter.Drawings;
+using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Commands
 {
@@ -12,13 +13,13 @@ namespace CanvasPainter.Commands
         {
             ValidateAndSetProperties(inputParameters);
         }
-        
+
         public void ValidateAndSetProperties(string[] inputParameters)
         {
             if (!(inputParameters.Length == 4 && int.TryParse(inputParameters[1], out int x) &&
                   int.TryParse(inputParameters[2], out int y) && char.TryParse(inputParameters[3], out char color)))
             {
-                throw new ArgumentException("Colorize command needs 4 parameters: B x y c");
+                throw ValidationException.CreateInstance();
             }
 
             ColorPoint = Point.CreateFor(x, y);

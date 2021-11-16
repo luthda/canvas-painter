@@ -6,12 +6,12 @@ namespace CanvasPainter.Testing.Handlers
 {
     public class QuitHandlerTest
     {
+        private QuitHandler QuitHandler { get; set; }
+        
         public QuitHandlerTest()
         {
             QuitHandler = new QuitHandler();
         }
-
-        private QuitHandler QuitHandler { get; set; }
         [Fact]
         public void HandleOn_QuitCommand_ReturnsTrue()
         {
