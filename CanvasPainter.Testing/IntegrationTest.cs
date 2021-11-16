@@ -14,7 +14,6 @@ namespace CanvasPainter.Testing
         public IntegrationTest()
         {
             _paintHandler = new PaintHandler();
-            _quiteHandler = new QuitHandler();
         }
 
         [Fact]
