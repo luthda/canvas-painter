@@ -12,7 +12,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
         {
             // arrange
-            var inputParameters = new string[] {"B", "10", "3", "o"};
+            var inputParameters = new[] {"B", "10", "3", "o"};
 
             // act
             FloodFillCommand = new FloodFillCommand(inputParameters);
@@ -27,7 +27,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithInvalidParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[] {"B", "10", "2", "630"};
+            var inputParameters = new[] {"B", "10", "2", "630"};
 
             // act & assert
             Assert.Throws<ValidationException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));
@@ -37,7 +37,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithTooShortParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[] {"B", "10", "2"};
+            var inputParameters = new[] {"B", "10", "2"};
 
             // act & assert
             Assert.Throws<ValidationException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));

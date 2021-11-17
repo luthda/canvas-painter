@@ -12,7 +12,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
         {
             // arrange
-            var inputParameters = new string[] {"L", "1", "2", "6", "2"};
+            var inputParameters = new[] {"L", "1", "2", "6", "2"};
 
             // act
             LineCommand = new LineCommand(inputParameters);
@@ -28,7 +28,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithInvalidParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[] {"L", "1", "2", "6", "4"};
+            var inputParameters = new[] {"L", "1", "2", "6", "4"};
 
             // act & assert
             Assert.Throws<ValidationException>(() => LineCommand = new LineCommand(inputParameters));
@@ -38,7 +38,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithTooShortParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[] {"L", "1", "2", "6"};
+            var inputParameters = new[] {"L", "1", "2", "6"};
 
             // act & assert
             Assert.Throws<ValidationException>(() => LineCommand = new LineCommand(inputParameters));

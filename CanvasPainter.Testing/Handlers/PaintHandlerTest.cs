@@ -19,7 +19,7 @@ namespace CanvasPainter.Testing.Handlers
         public void HandleOn_CreateCommand_ReturnsDrawnCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
 
             var stringBuilder = new StringBuilder();
@@ -41,11 +41,11 @@ namespace CanvasPainter.Testing.Handlers
         public void HandleOn_LineCommand_ReturnsDrawnCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
             PaintHandler.HandleOn(createCommand);
 
-            var inputLineParameters = new string[] {"L", "1", "2", "6", "2"};
+            var inputLineParameters = new[] {"L", "1", "2", "6", "2"};
             var lineCommand = new LineCommand(inputLineParameters);
             
             var stringBuilder = new StringBuilder();
@@ -67,11 +67,11 @@ namespace CanvasPainter.Testing.Handlers
         public void HandleOn_InvalidLineParameter_ThrowsArgumentException()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
             PaintHandler.HandleOn(createCommand);
 
-            var inputLineParameters = new string[] {"L", "30", "2", "6", "2"};
+            var inputLineParameters = new[] {"L", "30", "2", "6", "2"};
             var lineCommand = new LineCommand(inputLineParameters);
             
             // act & assert
@@ -82,11 +82,11 @@ namespace CanvasPainter.Testing.Handlers
         public void HandleOn_RectangleCommand_ReturnsDrawnCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
-            var rectangleParameters = new string[] {"R", "14", "1", "18", "3"};
+            var rectangleParameters = new[] {"R", "14", "1", "18", "3"};
             var rectangleCommand = new RectangleCommand(rectangleParameters);
             
             var stringBuilder = new StringBuilder();
@@ -108,11 +108,11 @@ namespace CanvasPainter.Testing.Handlers
         public void HandleOn_InvalidRectangleCommand_ThrowsArgumentException()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
-            var inputLineParameters = new string[] {"R", "30", "1", "18", "3"};
+            var inputLineParameters = new[] {"R", "30", "1", "18", "3"};
             var rectangleCommand = new RectangleCommand(inputLineParameters);
             
             // act & assert
@@ -123,11 +123,11 @@ namespace CanvasPainter.Testing.Handlers
         public void HandleOn_FloodFillCommand_ReturnsDrawnCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
-            var inputFloodFillParameters = new string[] {"B", "20", "4", "o"};
+            var inputFloodFillParameters = new[] {"B", "20", "4", "o"};
             var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
             
             var stringBuilder = new StringBuilder();
@@ -149,11 +149,11 @@ namespace CanvasPainter.Testing.Handlers
         public void HandleOn_InvalidFillCommand_DoesNothing()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             var createCommand = new CreateCommand(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
-            var inputFloodFillParameters = new string[] {"B", "20", "5", "o"};
+            var inputFloodFillParameters = new[] {"B", "20", "5", "o"};
             var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
             
             var stringBuilder = new StringBuilder();

@@ -12,7 +12,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
         {
             // arrange
-            var inputParameters = new string[] {"R", "14", "1", "18", "3"};
+            var inputParameters = new[] {"R", "14", "1", "18", "3"};
 
             // act
             RectangleCommand = new RectangleCommand(inputParameters);
@@ -28,7 +28,7 @@ namespace CanvasPainter.Testing.Commands
         public void ValidateAndSetProperties_WithInvalidParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new string[] {"R", "1", "2", "6"};
+            var inputParameters = new[] {"R", "1", "2", "6"};
 
             // act & assert
             Assert.Throws<ValidationException>(() => RectangleCommand = new RectangleCommand(inputParameters));

@@ -15,7 +15,7 @@ namespace CanvasPainter.Testing.Drawings
         public void Initialize_WithValidParameters_ReturnsCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "10", "9"};
+            var inputParameters = new[] {"C", "10", "9"};
 
             // act
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
@@ -30,7 +30,7 @@ namespace CanvasPainter.Testing.Drawings
         public void AddBorder_ReturnsCanvasWithBorderAsString()
         {
             // arrange
-            var inputParameters = new string[] {"C", "4", "2"};
+            var inputParameters = new[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
             var expectedString = new StringBuilder();
@@ -51,7 +51,7 @@ namespace CanvasPainter.Testing.Drawings
         {
             // arrange
             Canvas = new EmptyCanvas();
-            var inputParameters = new string[] {"C", "4", "2"};
+            var inputParameters = new[] {"C", "4", "2"};
             var command = new CreateCommand(inputParameters);
 
             // act & assert
@@ -62,10 +62,10 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawHorizontal_WithValidLineCommand_ReturnsCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "4", "2"};
+            var inputParameters = new[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
-            var inputLineParameters = new string[] {"L", "1", "1", "4", "1"};
+            var inputLineParameters = new[] {"L", "1", "1", "4", "1"};
             var lineCommand = new LineCommand(inputLineParameters);
 
             var expectedString = new StringBuilder();
@@ -85,10 +85,10 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawVertical_WithValidLineCommand_ReturnsCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "4", "2"};
+            var inputParameters = new[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
-            var inputLineParameters = new string[] {"L", "1", "1", "1", "2"};
+            var inputLineParameters = new[] {"L", "1", "1", "1", "2"};
             var lineCommand = new LineCommand(inputLineParameters);
 
             var expectedString = new StringBuilder();
@@ -108,10 +108,10 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawHorizontalReverse_WithValidLineCommand_ReturnsCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "4", "2"};
+            var inputParameters = new[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
-            var inputLineParameters = new string[] {"L", "4", "1", "1", "1"};
+            var inputLineParameters = new[] {"L", "4", "1", "1", "1"};
             var lineCommand = new LineCommand(inputLineParameters);
 
             var expectedString = new StringBuilder();
@@ -131,10 +131,10 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawVerticalReverse_WithValidLineCommand_ReturnsCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "4", "2"};
+            var inputParameters = new[] {"C", "4", "2"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
-            var inputLineParameters = new string[] {"L", "1", "2", "1", "1"};
+            var inputLineParameters = new[] {"L", "1", "2", "1", "1"};
             var lineCommand = new LineCommand(inputLineParameters);
 
             var expectedString = new StringBuilder();
@@ -154,10 +154,10 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawRectangle_WithValidRectangleCommand_ReturnsCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
 
-            var rectangleParameters = new string[] {"R", "14", "1", "18", "3"};
+            var rectangleParameters = new[] {"R", "14", "1", "18", "3"};
             var rectangleCommand = new RectangleCommand(rectangleParameters);
 
             var stringBuilder = new StringBuilder();
@@ -179,9 +179,9 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawRectangle_WithInvalidRectangleCommand_ThrowsArgumentException()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            var inputRectangleParameters = new string[] {"R", "30", "1", "18", "3"};
+            var inputRectangleParameters = new[] {"R", "30", "1", "18", "3"};
             var rectangleCommand = new RectangleCommand(inputRectangleParameters);
 
             // act & assert
@@ -192,9 +192,9 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawFloodFill_WithValidFloodFillCommand_ReturnsCanvas()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            var inputFloodFillParameters = new string[] {"B", "20", "4", "o"};
+            var inputFloodFillParameters = new[] {"B", "20", "4", "o"};
             var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
 
             var stringBuilder = new StringBuilder();
@@ -216,9 +216,9 @@ namespace CanvasPainter.Testing.Drawings
         public void DrawFloodFill_WithInvalidFloodFillCommand_DoesNothing()
         {
             // arrange
-            var inputParameters = new string[] {"C", "20", "4"};
+            var inputParameters = new[] {"C", "20", "4"};
             Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
-            var inputFloodFillParameters = new string[] {"B", "20", "5", "o"};
+            var inputFloodFillParameters = new[] {"B", "20", "5", "o"};
             var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
 
             var stringBuilder = new StringBuilder();

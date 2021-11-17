@@ -6,13 +6,6 @@ namespace CanvasPainter.Testing.Commands
 {
     public class CommandFactoryTest
     {
-        private CommandFactory CommandFactory { get; set; }
-
-        public CommandFactoryTest()
-        {
-            CommandFactory = new CommandFactory();
-        }
-
         [Fact]
         public void CreateFor_TypeCWithValidInputParameters_ReturnsCreateCommand()
         {
