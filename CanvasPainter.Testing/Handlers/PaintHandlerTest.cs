@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using CanvasPainter.Commands;
-using CanvasPainter.Drawings;
 using CanvasPainter.Handlers;
 using Xunit;
 

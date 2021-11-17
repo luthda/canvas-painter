@@ -1,4 +1,3 @@
-using System;
 using CanvasPainter.Drawings;
 using CanvasPainter.Exceptions;
 

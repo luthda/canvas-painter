@@ -1,4 +1,3 @@
-using System;
 using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Commands

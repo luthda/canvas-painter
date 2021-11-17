@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Commands

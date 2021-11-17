@@ -1,4 +1,3 @@
-using System;
 using CanvasPainter.Commands;
 
 namespace CanvasPainter.Handlers
