@@ -1,4 +1,4 @@
-# CanvasPainter2.0
+# CanvasPainter
 
 ### Setup
 * Download .NET 5 or latest.
