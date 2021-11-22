@@ -4,7 +4,7 @@ using CanvasPainter.Exceptions;
 
 namespace CanvasPainter.Commands
 {
-    public class CommandFactory
+    public static class CommandFactory
     {
         public static ICommand CreateFor(string inputValues)
         {

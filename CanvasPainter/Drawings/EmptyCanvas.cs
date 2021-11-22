@@ -7,7 +7,7 @@ namespace CanvasPainter.Drawings
     {
         public override Canvas Draw(ICommand command)
         {
-            throw new CommandException();
+            throw CommandException.CreateInstance();
         }
     }
 }
