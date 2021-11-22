@@ -235,5 +235,21 @@ namespace CanvasPainter.Testing.Drawings
             // assert
             Assert.Equal(stringBuilder.ToString(), Canvas.DrawBorder());
         }
+
+        [Fact]
+        public void Clone_ReturnsNewCanvasObject()
+        {
+            // arrange
+            var inputParameters = new[] {"C", "20", "4"};
+            Canvas = Canvas.CreateFor(new CreateCommand(inputParameters));
+            
+            // act
+            var clonedCanvas = Canvas.Clone();
+            
+            // assert
+            Assert.NotEqual(Canvas, clonedCanvas);
+            Assert.Equal(Canvas.Height, clonedCanvas.Height);
+            Assert.Equal(Canvas.Width, clonedCanvas.Width);
+        } 
     }
 }

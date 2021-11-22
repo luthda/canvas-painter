@@ -6,6 +6,7 @@ namespace CanvasPainter.Commands
         L,
         R,
         B,
-        Q
+        Q,
+        Z
     }
 }

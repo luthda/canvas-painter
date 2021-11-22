@@ -23,6 +23,7 @@ namespace CanvasPainter.Commands
                 CommandType.R => new RectangleCommand(inputParameters),
                 CommandType.B => new FloodFillCommand(inputParameters),
                 CommandType.Q => new QuitCommand(inputParameters),
+                CommandType.Z => new UndoCommand(inputParameters),
                 _ => throw CommandException.CreateInstance()
             };
         }

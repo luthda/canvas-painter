@@ -55,6 +55,7 @@ namespace CanvasPainter.Applications
             stringBuilder.AppendLine(
                 "B x y c         Should fill the entire area connected to (x,y) with 'colour' c. The behavior of this is the same as that of the 'bucket fill' tool in paint programs.");
             stringBuilder.AppendLine("Q               Should quit the program.");
+            stringBuilder.AppendLine("Z               Should restore previous canvas.");
             _applicationConsole.WriteLine(stringBuilder.ToString());
         }
     }

@@ -27,6 +27,13 @@ namespace CanvasPainter.Drawings
             }
         }
 
+        private Canvas(int width, int height)
+        {
+            Width = width;
+            Height = height;
+            CanvasBody = new char[width, height];
+        }
+
         protected Canvas()
         {
         }
@@ -77,7 +84,22 @@ namespace CanvasPainter.Drawings
                 FloodFill(floodFillCommand.ColorPoint, floodFillCommand.FillColor);
             }
 
-            return (Canvas) MemberwiseClone();
+            return Clone();
+        }
+
+        public Canvas Clone()
+        {
+            var canvasClone = new Canvas(Width, Height);
+            
+            for (int x = 1; x <= canvasClone.Width; x++)
+            {
+                for (int y = 1; y <= canvasClone.Height; y++)
+                {
+                    canvasClone.CanvasBody[x - 1, y - 1] = GetColorAt(Point.CreateFor(x, y));
+                }
+            }
+            
+            return canvasClone;
         }
 
         private void DrawLine(Point startPoint, Point endPoint)
