@@ -13,7 +13,7 @@ namespace CanvasPainter.Messages
 
             if (!Enum.TryParse(commandChar, out MessageType commandType))
             {
-                throw CommandException.CreateInstance();
+                throw CanvasException.BecauseIsNotAValidCommand();
             }
 
             return commandType switch
@@ -23,7 +23,7 @@ namespace CanvasPainter.Messages
                 MessageType.R => new RectangleMessage(inputParameters),
                 MessageType.B => new FloodFillMessage(inputParameters),
                 MessageType.Q => new QuitMessage(inputParameters),
-                _ => throw CommandException.CreateInstance()
+                _ => throw CanvasException.BecauseIsNotAValidCommand()
             };
         }
     }

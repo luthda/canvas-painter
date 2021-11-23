@@ -2,9 +2,9 @@ using CanvasPainter.Exceptions;
 using CanvasPainter.Messages;
 using Xunit;
 
-namespace CanvasPainter.Testing.Commands
+namespace CanvasPainter.Testing.Messages
 {
-    public class RectangleCommandTest
+    public class RectangleMessageTest
     {
         private RectangleMessage RectangleMessage { get; set; }
 
@@ -31,7 +31,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"R", "1", "2", "6"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => RectangleMessage = new RectangleMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => RectangleMessage = new RectangleMessage(inputParameters));
         }
     }
 }

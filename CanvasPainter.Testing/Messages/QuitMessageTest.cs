@@ -2,9 +2,9 @@ using CanvasPainter.Exceptions;
 using CanvasPainter.Messages;
 using Xunit;
 
-namespace CanvasPainter.Testing.Commands
+namespace CanvasPainter.Testing.Messages
 {
-    public class QuitCommandTest
+    public class QuitMessageTest
     {
         private QuitMessage QuitMessage { get; set; }
 
@@ -28,7 +28,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"X", "5"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => QuitMessage = new QuitMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => QuitMessage = new QuitMessage(inputParameters));
         }
     }
 }

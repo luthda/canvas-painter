@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using CanvasPainter.Exceptions;
 using CanvasPainter.Handlers;
 using CanvasPainter.Messages;
 
@@ -27,13 +28,14 @@ namespace CanvasPainter.Applications
                     _applicationConsole.Write("Enter Commands: ");
                     var inputValues = _applicationConsole.ReadLine();
                     var message = MessageFactory.CreateFor(inputValues);
+
                     if (message is QuitMessage)
                     {
                         IsQuit = true;
                     }
                     else _applicationConsole.Write(_paintHandler.HandleOn(message));
                 }
-                catch (Exception ex)
+                catch (CanvasException ex)
                 {
                     _applicationConsole.WriteLine(ex.Message);
                 }

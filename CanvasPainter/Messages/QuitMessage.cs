@@ -13,7 +13,7 @@ namespace CanvasPainter.Messages
         {
             if (inputParameters.Length != 1)
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
         }
     }

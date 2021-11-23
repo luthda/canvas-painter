@@ -2,9 +2,9 @@ using CanvasPainter.Exceptions;
 using CanvasPainter.Messages;
 using Xunit;
 
-namespace CanvasPainter.Testing.Commands
+namespace CanvasPainter.Testing.Messages
 {
-    public class CommandFactoryTest
+    public class MessageFactoryTest
     {
         [Fact]
         public void CreateFor_TypeCWithValidInputParameters_ReturnsCreateCommand()
@@ -26,7 +26,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("C 20 X");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
+            Assert.Throws<CanvasException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("C 50 100");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
+            Assert.Throws<CanvasException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("Q 100");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
+            Assert.Throws<CanvasException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("X 1 2 6 2");
 
             // act & assert
-            Assert.Throws<CommandException>(() => MessageFactory.CreateFor(inputParameters));
+            Assert.Throws<CanvasException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("L 1 2 6 3");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
+            Assert.Throws<CanvasException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]

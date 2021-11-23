@@ -2,9 +2,9 @@ using CanvasPainter.Exceptions;
 using CanvasPainter.Messages;
 using Xunit;
 
-namespace CanvasPainter.Testing.Commands
+namespace CanvasPainter.Testing.Messages
 {
-    public class LineCommandTest
+    public class LineMessageTest
     {
         private LineMessage LineMessage { get; set; }
 
@@ -31,7 +31,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"L", "1", "2", "6", "4"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => LineMessage = new LineMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => LineMessage = new LineMessage(inputParameters));
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"L", "1", "2", "6"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => LineMessage = new LineMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => LineMessage = new LineMessage(inputParameters));
         }
     }
 }

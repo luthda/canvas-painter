@@ -19,12 +19,12 @@ namespace CanvasPainter.Messages
             if (!(inputParameters.Length == 3 && int.TryParse(inputParameters[1], out int width) &&
                   int.TryParse(inputParameters[2], out int height)))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
 
             if (width < LowerLimit || width > UpperLimit && height < LowerLimit || height > UpperLimit)
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseCoordinateNotInCanvas();
             }
 
             Width = width;

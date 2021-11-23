@@ -7,7 +7,7 @@ namespace CanvasPainter.Drawings
     {
         public override Canvas Draw(IMessage message)
         {
-            throw CommandException.CreateInstance();
+            throw CanvasException.BecauseIsEmpty();
         }
     }
 }

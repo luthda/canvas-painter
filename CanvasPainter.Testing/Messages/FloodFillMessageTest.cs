@@ -2,9 +2,9 @@ using CanvasPainter.Exceptions;
 using CanvasPainter.Messages;
 using Xunit;
 
-namespace CanvasPainter.Testing.Commands
+namespace CanvasPainter.Testing.Messages
 {
-    public class FloodFillCommandTest
+    public class FloodFillMessageTest
     {
         private FloodFillMessage FloodFillMessage { get; set; }
 
@@ -30,7 +30,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"B", "10", "2", "630"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => FloodFillMessage = new FloodFillMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => FloodFillMessage = new FloodFillMessage(inputParameters));
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"B", "10", "2"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => FloodFillMessage = new FloodFillMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => FloodFillMessage = new FloodFillMessage(inputParameters));
         }
     }
 }

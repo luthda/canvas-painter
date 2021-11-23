@@ -19,7 +19,7 @@ namespace CanvasPainter.Messages
                   int.TryParse(inputParameters[2], out int y1) && int.TryParse(inputParameters[3], out int x2) &&
                   int.TryParse(inputParameters[4], out int y2)))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
 
             StartPoint = Point.CreateFor(x1, y1);

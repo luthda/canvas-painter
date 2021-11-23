@@ -55,7 +55,7 @@ namespace CanvasPainter.Testing.Drawings
             var command = new CreateMessage(inputParameters);
 
             // act & assert
-            Assert.ThrowsAny<CommandException>(() => Canvas.Draw(command));
+            Assert.ThrowsAny<CanvasException>(() => Canvas.Draw(command));
         }
 
         [Fact]
