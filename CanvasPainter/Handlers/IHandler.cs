@@ -1,9 +1,9 @@
-using CanvasPainter.Commands;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Handlers
 {
     public interface IHandler
     {
-        public string HandleOn(ICommand command);
+        public string HandleOn(IMessage message);
     }
 }

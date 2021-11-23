@@ -1,12 +1,12 @@
 using CanvasPainter.Exceptions;
 
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public class QuitCommand : ICommand
+    public class QuitMessage : IMessage
     {
         public bool IsQuit { get; private set; }
 
-        public QuitCommand(string[] inputParameters)
+        public QuitMessage(string[] inputParameters)
         {
             ValidateAndSetProperties(inputParameters);
         }

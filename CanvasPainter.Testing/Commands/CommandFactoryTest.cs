@@ -1,5 +1,5 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing.Commands
@@ -13,10 +13,10 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("C 20 4");
 
             // act
-            var createCommand = CommandFactory.CreateFor(inputParameters);
+            var createCommand = MessageFactory.CreateFor(inputParameters);
 
             // assert
-            Assert.Equal(typeof(CreateCommand), createCommand.GetType());
+            Assert.Equal(typeof(CreateMessage), createCommand.GetType());
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("C 20 X");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => CommandFactory.CreateFor(inputParameters));
+            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("C 50 100");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => CommandFactory.CreateFor(inputParameters));
+            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -46,10 +46,10 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("Q");
 
             // act
-            var quitCommand = CommandFactory.CreateFor(inputParameters);
+            var quitCommand = MessageFactory.CreateFor(inputParameters);
 
             // assert
-            Assert.Equal(typeof(QuitCommand), quitCommand.GetType());
+            Assert.Equal(typeof(QuitMessage), quitCommand.GetType());
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("Q 100");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => CommandFactory.CreateFor(inputParameters));
+            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -69,10 +69,10 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("L 1 2 6 2");
 
             // act
-            var lineCommand = CommandFactory.CreateFor(inputParameters);
+            var lineCommand = MessageFactory.CreateFor(inputParameters);
 
             // assert
-            Assert.Equal(typeof(LineCommand), lineCommand.GetType());
+            Assert.Equal(typeof(LineMessage), lineCommand.GetType());
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("X 1 2 6 2");
 
             // act & assert
-            Assert.Throws<CommandException>(() => CommandFactory.CreateFor(inputParameters));
+            Assert.Throws<CommandException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("L 1 2 6 3");
 
             // act & assert
-            Assert.Throws<ValidationException>(() => CommandFactory.CreateFor(inputParameters));
+            Assert.Throws<ValidationException>(() => MessageFactory.CreateFor(inputParameters));
         }
 
         [Fact]
@@ -102,10 +102,10 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("R 14 1 18 3");
 
             // act
-            var rectangleCommand = CommandFactory.CreateFor(inputParameters);
+            var rectangleCommand = MessageFactory.CreateFor(inputParameters);
 
             // assert
-            Assert.Equal(typeof(RectangleCommand), rectangleCommand.GetType());
+            Assert.Equal(typeof(RectangleMessage), rectangleCommand.GetType());
         }
 
         [Fact]
@@ -115,10 +115,10 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new string("B 20 4 o");
 
             // act
-            var floodFillCommand = CommandFactory.CreateFor(inputParameters);
+            var floodFillCommand = MessageFactory.CreateFor(inputParameters);
 
             // assert
-            Assert.Equal(typeof(FloodFillCommand), floodFillCommand.GetType());
+            Assert.Equal(typeof(FloodFillMessage), floodFillCommand.GetType());
         }
     }
 }

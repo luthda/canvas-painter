@@ -1,6 +1,6 @@
 using System;
 using System.Text;
-using CanvasPainter.Commands;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Drawings
 {
@@ -12,10 +12,10 @@ namespace CanvasPainter.Drawings
         public int Height { get; }
         public char[,] CanvasBody { get; }
 
-        private Canvas(CreateCommand command)
+        private Canvas(CreateMessage message)
         {
-            Width = command.Width;
-            Height = command.Height;
+            Width = message.Width;
+            Height = message.Height;
             CanvasBody = new char[Width, Height];
 
             for (int x = 1; x <= Width; x++)
@@ -31,9 +31,9 @@ namespace CanvasPainter.Drawings
         {
         }
 
-        public static Canvas CreateFor(CreateCommand command)
+        public static Canvas CreateFor(CreateMessage message)
         {
-            return new Canvas(command);
+            return new Canvas(message);
         }
 
         public string DrawBorder()
@@ -57,23 +57,23 @@ namespace CanvasPainter.Drawings
             return stringBuilder.ToString();
         }
 
-        public virtual Canvas Draw(ICommand command)
+        public virtual Canvas Draw(IMessage message)
         {
-            if (command.GetType() == typeof(LineCommand))
+            if (message.GetType() == typeof(LineMessage))
             {
-                var lineCommand = (LineCommand) command;
+                var lineCommand = (LineMessage) message;
                 DrawLine(lineCommand.StartPoint, lineCommand.EndPoint);
             }
 
-            if (command.GetType() == typeof(RectangleCommand))
+            if (message.GetType() == typeof(RectangleMessage))
             {
-                var rectangleCommand = (RectangleCommand) command;
+                var rectangleCommand = (RectangleMessage) message;
                 DrawRectangle(rectangleCommand.StartPoint, rectangleCommand.EndPoint);
             }
 
-            if (command.GetType() == typeof(FloodFillCommand))
+            if (message.GetType() == typeof(FloodFillMessage))
             {
-                var floodFillCommand = (FloodFillCommand) command;
+                var floodFillCommand = (FloodFillMessage) message;
                 FloodFill(floodFillCommand.ColorPoint, floodFillCommand.FillColor);
             }
 

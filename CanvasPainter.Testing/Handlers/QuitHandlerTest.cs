@@ -1,5 +1,5 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Handlers;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing.Handlers
@@ -17,7 +17,7 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new string[] {"Q"};
-            var quitCommand = new QuitCommand(inputParameters);
+            var quitCommand = new QuitMessage(inputParameters);
             
             // act
             var isQuit = QuitHandler.HandleQuit(quitCommand);

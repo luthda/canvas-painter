@@ -1,12 +1,12 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing.Commands
 {
     public class QuitCommandTest
     {
-        private QuitCommand QuitCommand { get; set; }
+        private QuitMessage QuitMessage { get; set; }
 
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsQuitProp()
@@ -15,10 +15,10 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"Q"};
 
             // act
-            QuitCommand = new QuitCommand(inputParameters);
+            QuitMessage = new QuitMessage(inputParameters);
 
             // assert
-            Assert.True(QuitCommand.IsQuit);
+            Assert.True(QuitMessage.IsQuit);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"X", "5"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => QuitCommand = new QuitCommand(inputParameters));
+            Assert.Throws<ValidationException>(() => QuitMessage = new QuitMessage(inputParameters));
         }
     }
 }

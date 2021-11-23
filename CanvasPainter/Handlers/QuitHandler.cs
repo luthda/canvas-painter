@@ -1,12 +1,12 @@
-using CanvasPainter.Commands;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Handlers
 {
     public class QuitHandler
     {
-        public bool HandleQuit(QuitCommand command)
+        public bool HandleQuit(QuitMessage message)
         {
-            return command.IsQuit;
+            return message.IsQuit;
         }
     }
 }

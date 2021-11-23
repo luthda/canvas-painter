@@ -1,6 +1,6 @@
 using System.Text;
-using CanvasPainter.Commands;
 using CanvasPainter.Handlers;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing
@@ -30,7 +30,7 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var createCommand = CommandFactory.CreateFor(inputValues);
+            var createCommand = MessageFactory.CreateFor(inputValues);
             Canvas = _paintHandler.HandleOn(createCommand);
             
             // assert
@@ -48,7 +48,7 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var lineCommand = CommandFactory.CreateFor(inputValues);
+            var lineCommand = MessageFactory.CreateFor(inputValues);
             Canvas = _paintHandler.HandleOn(lineCommand);
            
             // assert
@@ -66,7 +66,7 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var verticalLineCommand = CommandFactory.CreateFor(inputValues);
+            var verticalLineCommand = MessageFactory.CreateFor(inputValues);
             Canvas = _paintHandler.HandleOn(verticalLineCommand);
            
             // assert
@@ -84,7 +84,7 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var rectangleCommand = CommandFactory.CreateFor(inputValues);
+            var rectangleCommand = MessageFactory.CreateFor(inputValues);
             Canvas = _paintHandler.HandleOn(rectangleCommand);
             
             // assert
@@ -102,7 +102,7 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var floodFillCommand = CommandFactory.CreateFor(inputValues);
+            var floodFillCommand = MessageFactory.CreateFor(inputValues);
             Canvas = _paintHandler.HandleOn(floodFillCommand);
 
             // assert

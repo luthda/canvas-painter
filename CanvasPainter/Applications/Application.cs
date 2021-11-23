@@ -1,7 +1,7 @@
 using System;
 using System.Text;
-using CanvasPainter.Commands;
 using CanvasPainter.Handlers;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Applications
 {
@@ -29,10 +29,10 @@ namespace CanvasPainter.Applications
                 {
                     _applicationConsole.Write("Enter Commands: ");
                     var inputValues = _applicationConsole.ReadLine();
-                    var command = CommandFactory.CreateFor(inputValues);
-                    if (command.GetType() == typeof(QuitCommand))
+                    var command = MessageFactory.CreateFor(inputValues);
+                    if (command.GetType() == typeof(QuitMessage))
                     {
-                        IsQuit = _quitHandler.HandleQuit((QuitCommand) command);
+                        IsQuit = _quitHandler.HandleQuit((QuitMessage) command);
                     }
                     else _applicationConsole.Write(_paintHandler.HandleOn(command));
                 }

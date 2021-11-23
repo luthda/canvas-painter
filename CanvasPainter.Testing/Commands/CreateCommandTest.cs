@@ -1,12 +1,12 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing.Commands
 {
     public class CreateCommandTest
     {
-        private CreateCommand CreateCommand { get; set; }
+        private CreateMessage CreateMessage { get; set; }
 
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
@@ -15,11 +15,11 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"C", "20", "4"};
             
             // act
-            CreateCommand = new CreateCommand(inputParameters);
+            CreateMessage = new CreateMessage(inputParameters);
             
             // assert
-            Assert.Equal(20, CreateCommand.Width);
-            Assert.Equal(4, CreateCommand.Height);
+            Assert.Equal(20, CreateMessage.Width);
+            Assert.Equal(4, CreateMessage.Height);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[]{"C", "20", "X"};
             
             // act & assert
-            Assert.Throws<ValidationException>(() => CreateCommand = new CreateCommand(inputParameters));
+            Assert.Throws<ValidationException>(() => CreateMessage = new CreateMessage(inputParameters));
         }
         
         [Fact]
@@ -39,7 +39,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[]{"C", "0", "200"};
             
             // act & assert
-            Assert.Throws<ValidationException>(() => CreateCommand = new CreateCommand(inputParameters));
+            Assert.Throws<ValidationException>(() => CreateMessage = new CreateMessage(inputParameters));
         }
     }
 }

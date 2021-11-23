@@ -1,7 +1,7 @@
 using System;
 using System.Text;
-using CanvasPainter.Commands;
 using CanvasPainter.Handlers;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing.Handlers
@@ -20,7 +20,7 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            var createCommand = new CreateCommand(inputParameters);
+            var createCommand = new CreateMessage(inputParameters);
 
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
@@ -42,11 +42,11 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            var createCommand = new CreateCommand(inputParameters);
+            var createCommand = new CreateMessage(inputParameters);
             PaintHandler.HandleOn(createCommand);
 
             var inputLineParameters = new[] {"L", "1", "2", "6", "2"};
-            var lineCommand = new LineCommand(inputLineParameters);
+            var lineCommand = new LineMessage(inputLineParameters);
             
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
@@ -68,11 +68,11 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            var createCommand = new CreateCommand(inputParameters);
+            var createCommand = new CreateMessage(inputParameters);
             PaintHandler.HandleOn(createCommand);
 
             var inputLineParameters = new[] {"L", "30", "2", "6", "2"};
-            var lineCommand = new LineCommand(inputLineParameters);
+            var lineCommand = new LineMessage(inputLineParameters);
             
             // act & assert
             Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(lineCommand));
@@ -83,11 +83,11 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            var createCommand = new CreateCommand(inputParameters);
+            var createCommand = new CreateMessage(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
             var rectangleParameters = new[] {"R", "14", "1", "18", "3"};
-            var rectangleCommand = new RectangleCommand(rectangleParameters);
+            var rectangleCommand = new RectangleMessage(rectangleParameters);
             
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
@@ -109,11 +109,11 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            var createCommand = new CreateCommand(inputParameters);
+            var createCommand = new CreateMessage(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
             var inputLineParameters = new[] {"R", "30", "1", "18", "3"};
-            var rectangleCommand = new RectangleCommand(inputLineParameters);
+            var rectangleCommand = new RectangleMessage(inputLineParameters);
             
             // act & assert
             Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(rectangleCommand));
@@ -124,11 +124,11 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            var createCommand = new CreateCommand(inputParameters);
+            var createCommand = new CreateMessage(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
             var inputFloodFillParameters = new[] {"B", "20", "4", "o"};
-            var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
+            var floodFillCommand = new FloodFillMessage(inputFloodFillParameters);
             
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");
@@ -150,11 +150,11 @@ namespace CanvasPainter.Testing.Handlers
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            var createCommand = new CreateCommand(inputParameters);
+            var createCommand = new CreateMessage(inputParameters);
             PaintHandler.HandleOn(createCommand);
             
             var inputFloodFillParameters = new[] {"B", "20", "5", "o"};
-            var floodFillCommand = new FloodFillCommand(inputFloodFillParameters);
+            var floodFillCommand = new FloodFillMessage(inputFloodFillParameters);
             
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("----------------------");

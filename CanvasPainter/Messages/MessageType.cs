@@ -1,6 +1,6 @@
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public enum CommandType
+    public enum MessageType
     {
         C,
         L,

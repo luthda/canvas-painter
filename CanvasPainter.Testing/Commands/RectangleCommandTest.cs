@@ -1,12 +1,12 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing.Commands
 {
     public class RectangleCommandTest
     {
-        private RectangleCommand RectangleCommand { get; set; }
+        private RectangleMessage RectangleMessage { get; set; }
 
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
@@ -15,13 +15,13 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"R", "14", "1", "18", "3"};
 
             // act
-            RectangleCommand = new RectangleCommand(inputParameters);
+            RectangleMessage = new RectangleMessage(inputParameters);
 
             // assert
-            Assert.Equal(14, RectangleCommand.StartPoint.X);
-            Assert.Equal(18, RectangleCommand.EndPoint.X);
-            Assert.Equal(1, RectangleCommand.StartPoint.Y);
-            Assert.Equal(3, RectangleCommand.EndPoint.Y);
+            Assert.Equal(14, RectangleMessage.StartPoint.X);
+            Assert.Equal(18, RectangleMessage.EndPoint.X);
+            Assert.Equal(1, RectangleMessage.StartPoint.Y);
+            Assert.Equal(3, RectangleMessage.EndPoint.Y);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"R", "1", "2", "6"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => RectangleCommand = new RectangleCommand(inputParameters));
+            Assert.Throws<ValidationException>(() => RectangleMessage = new RectangleMessage(inputParameters));
         }
     }
 }

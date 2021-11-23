@@ -1,5 +1,5 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Drawings;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Handlers
 {
@@ -12,15 +12,15 @@ namespace CanvasPainter.Handlers
             Canvas = new EmptyCanvas();
         }
 
-        public string HandleOn(ICommand command)
+        public string HandleOn(IMessage message)
         {
-            if (command.GetType() == typeof(CreateCommand))
+            if (message.GetType() == typeof(CreateMessage))
             {
-                Canvas = Canvas.CreateFor((CreateCommand) command);
+                Canvas = Canvas.CreateFor((CreateMessage) message);
             }
             else
             {
-                Canvas = Canvas.Draw(command);
+                Canvas = Canvas.Draw(message);
             }
 
             return Canvas.DrawBorder();
