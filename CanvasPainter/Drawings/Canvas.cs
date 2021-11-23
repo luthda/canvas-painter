@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using CanvasPainter.Exceptions;
 using CanvasPainter.Messages;
 
 namespace CanvasPainter.Drawings
@@ -79,8 +80,7 @@ namespace CanvasPainter.Drawings
         {
             if (!startPoint.IsPointInBodyRange(Width, Height) || !endPoint.IsPointInBodyRange(Width, Height))
             {
-                throw new ArgumentException(
-                    $"Your coordinate must be in canvas body area, width: {Width}, height: {Height}");
+                throw CanvasException.BecauseCoordinateNotInCanvas();
             }
 
             if (startPoint.X == endPoint.X) DrawVerticalLine(startPoint, endPoint);

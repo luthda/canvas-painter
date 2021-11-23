@@ -22,13 +22,18 @@ namespace CanvasPainter.Messages
                 throw CanvasException.BecauseOfInvalidInput();
             }
 
-            if (width < LowerLimit || width > UpperLimit && height < LowerLimit || height > UpperLimit)
+            if (!(IsInLimitedArea(width) && IsInLimitedArea(height)))
             {
                 throw CanvasException.BecauseCoordinateNotInCanvas();
             }
 
             Width = width;
             Height = height;
+        }
+
+        private bool IsInLimitedArea(int size)
+        {
+            return size >= LowerLimit && size <= UpperLimit;
         }
     }
 }
