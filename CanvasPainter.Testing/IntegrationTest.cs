@@ -7,7 +7,7 @@ namespace CanvasPainter.Testing
 {
     public class IntegrationTest
     {
-        private readonly IHandler _paintHandler;
+        private readonly PaintHandler _paintHandler;
         private string Canvas { get; set; }
 
         public IntegrationTest()

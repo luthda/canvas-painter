@@ -8,7 +8,7 @@ namespace CanvasPainter.Applications
     public class Application
     {
         private readonly IApplicationConsole _applicationConsole;
-        private readonly IHandler _paintHandler;
+        private readonly PaintHandler _paintHandler;
         private readonly QuitHandler _quitHandler;
         private bool IsQuit { get; set; }
 

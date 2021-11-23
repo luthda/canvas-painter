@@ -3,7 +3,7 @@ using CanvasPainter.Messages;
 
 namespace CanvasPainter.Handlers
 {
-    public class PaintHandler : IHandler
+    public class PaintHandler
     {
         private Canvas Canvas { get; set; }
 
