@@ -14,9 +14,9 @@ namespace CanvasPainter.Handlers
 
         public string HandleOn(IMessage message)
         {
-            if (message.GetType() == typeof(CreateMessage))
+            if (message is CreateMessage createMessage)
             {
-                Canvas = Canvas.CreateFor((CreateMessage) message);
+                Canvas = Canvas.CreateFor(createMessage);
             }
             else
             {

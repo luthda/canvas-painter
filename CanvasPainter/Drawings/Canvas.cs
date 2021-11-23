@@ -12,10 +12,10 @@ namespace CanvasPainter.Drawings
         public int Height { get; }
         public char[,] CanvasBody { get; }
 
-        private Canvas(CreateMessage message)
+        private Canvas(CreateMessage createMessage)
         {
-            Width = message.Width;
-            Height = message.Height;
+            Width = createMessage.Width;
+            Height = createMessage.Height;
             CanvasBody = new char[Width, Height];
 
             for (int x = 1; x <= Width; x++)
@@ -31,9 +31,9 @@ namespace CanvasPainter.Drawings
         {
         }
 
-        public static Canvas CreateFor(CreateMessage message)
+        public static Canvas CreateFor(CreateMessage createMessage)
         {
-            return new Canvas(message);
+            return new Canvas(createMessage);
         }
 
         public string DrawBorder()
@@ -59,22 +59,17 @@ namespace CanvasPainter.Drawings
 
         public virtual Canvas Draw(IMessage message)
         {
-            if (message.GetType() == typeof(LineMessage))
+            switch (message)
             {
-                var lineCommand = (LineMessage) message;
-                DrawLine(lineCommand.StartPoint, lineCommand.EndPoint);
-            }
-
-            if (message.GetType() == typeof(RectangleMessage))
-            {
-                var rectangleCommand = (RectangleMessage) message;
-                DrawRectangle(rectangleCommand.StartPoint, rectangleCommand.EndPoint);
-            }
-
-            if (message.GetType() == typeof(FloodFillMessage))
-            {
-                var floodFillCommand = (FloodFillMessage) message;
-                FloodFill(floodFillCommand.ColorPoint, floodFillCommand.FillColor);
+                case LineMessage lineMessage:
+                    DrawLine(lineMessage.StartPoint, lineMessage.EndPoint);
+                    break;
+                case RectangleMessage rectangleMessage:
+                    DrawRectangle(rectangleMessage.StartPoint, rectangleMessage.EndPoint);
+                    break;
+                case FloodFillMessage floodFillMessage:
+                    FloodFill(floodFillMessage.ColorPoint, floodFillMessage.FillColor);
+                    break;
             }
 
             return (Canvas) MemberwiseClone();

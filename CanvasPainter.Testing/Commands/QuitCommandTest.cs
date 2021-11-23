@@ -18,7 +18,7 @@ namespace CanvasPainter.Testing.Commands
             QuitMessage = new QuitMessage(inputParameters);
 
             // assert
-            Assert.True(QuitMessage.IsQuit);
+            Assert.Equal(typeof(QuitMessage), QuitMessage.GetType());
         }
 
         [Fact]
