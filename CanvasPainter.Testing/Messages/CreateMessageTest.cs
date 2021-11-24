@@ -6,40 +6,38 @@ namespace CanvasPainter.Testing.Messages
 {
     public class CreateMessageTest
     {
-        private CreateMessage CreateMessage { get; set; }
-
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
         {
             // arrange
             var inputParameters = new[] {"C", "20", "4"};
-            
+
             // act
-            CreateMessage = new CreateMessage(inputParameters);
-            
+            var createMessage = new CreateMessage(inputParameters);
+
             // assert
-            Assert.Equal(20, CreateMessage.Width);
-            Assert.Equal(4, CreateMessage.Height);
+            Assert.Equal(20, createMessage.Width);
+            Assert.Equal(4, createMessage.Height);
         }
 
         [Fact]
         public void ValidateAndSetProperties_WithInvalidParameters_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new[]{"C", "20", "X"};
-            
+            var inputParameters = new[] {"C", "20", "X"};
+
             // act & assert
-            Assert.Throws<CanvasException>(() => CreateMessage = new CreateMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => new CreateMessage(inputParameters));
         }
-        
+
         [Fact]
         public void ValidateAndSetProperties_WithInvalidSize_ThrowsValidationException()
         {
             // arrange
-            var inputParameters = new[]{"C", "0", "200"};
-            
+            var inputParameters = new[] {"C", "0", "200"};
+
             // act & assert
-            Assert.Throws<CanvasException>(() => CreateMessage = new CreateMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => new CreateMessage(inputParameters));
         }
     }
 }

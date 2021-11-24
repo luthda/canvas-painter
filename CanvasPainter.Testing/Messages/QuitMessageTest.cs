@@ -6,8 +6,6 @@ namespace CanvasPainter.Testing.Messages
 {
     public class QuitMessageTest
     {
-        private QuitMessage QuitMessage { get; set; }
-
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsQuitProp()
         {
@@ -15,10 +13,10 @@ namespace CanvasPainter.Testing.Messages
             var inputParameters = new[] {"Q"};
 
             // act
-            QuitMessage = new QuitMessage(inputParameters);
+            var quitMessage = new QuitMessage(inputParameters);
 
             // assert
-            Assert.Equal(typeof(QuitMessage), QuitMessage.GetType());
+            Assert.Equal(typeof(QuitMessage), quitMessage.GetType());
         }
 
         [Fact]
@@ -28,7 +26,7 @@ namespace CanvasPainter.Testing.Messages
             var inputParameters = new[] {"X", "5"};
 
             // act & assert
-            Assert.Throws<CanvasException>(() => QuitMessage = new QuitMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => new QuitMessage(inputParameters));
         }
     }
 }

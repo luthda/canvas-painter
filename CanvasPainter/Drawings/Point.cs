@@ -1,6 +1,6 @@
 namespace CanvasPainter.Drawings
 {
-    public class Point
+    public readonly struct Point
     {
         public int X { get; }
         public int Y { get; }
@@ -16,7 +16,7 @@ namespace CanvasPainter.Drawings
             return X > 0 && X <= width && Y > 0 && Y <= height;
         }
 
-        public static Point? CreateFor(int x, int y)
+        public static Point CreateFor(int x, int y)
         {
             return new Point(x, y);
         }

@@ -8,7 +8,6 @@ namespace CanvasPainter.Testing
     public class IntegrationTest
     {
         private readonly PaintHandler _paintHandler;
-        private string Canvas { get; set; }
 
         public IntegrationTest()
         {
@@ -31,10 +30,10 @@ namespace CanvasPainter.Testing
             
             // act
             var createCommand = MessageFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(createCommand);
+            string canvas = _paintHandler.HandleOn(createCommand);
             
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("L 1 2 6 2");
@@ -49,10 +48,10 @@ namespace CanvasPainter.Testing
             
             // act
             var lineCommand = MessageFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(lineCommand);
+            canvas = _paintHandler.HandleOn(lineCommand);
            
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("L 6 3 6 4");
@@ -67,10 +66,10 @@ namespace CanvasPainter.Testing
             
             // act
             var verticalLineCommand = MessageFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(verticalLineCommand);
+            canvas = _paintHandler.HandleOn(verticalLineCommand);
            
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("R 14 1 18 3");
@@ -85,10 +84,10 @@ namespace CanvasPainter.Testing
             
             // act
             var rectangleCommand = MessageFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(rectangleCommand);
+            canvas = _paintHandler.HandleOn(rectangleCommand);
             
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("B 10 3 o");
@@ -103,10 +102,10 @@ namespace CanvasPainter.Testing
             
             // act
             var floodFillCommand = MessageFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(floodFillCommand);
+            canvas = _paintHandler.HandleOn(floodFillCommand);
 
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
         }
     }
 }

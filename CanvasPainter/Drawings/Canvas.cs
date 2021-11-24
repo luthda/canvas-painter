@@ -75,7 +75,7 @@ namespace CanvasPainter.Drawings
             return (Canvas) MemberwiseClone();
         }
 
-        private void DrawLine(Point? startPoint, Point? endPoint)
+        private void DrawLine(Point startPoint, Point endPoint)
         {
             if (!startPoint.IsPointInBodyRange(Width, Height) || !endPoint.IsPointInBodyRange(Width, Height))
             {
@@ -92,7 +92,7 @@ namespace CanvasPainter.Drawings
             }
         }
 
-        private void DrawRectangle(Point? startPoint, Point? endPoint)
+        private void DrawRectangle(Point startPoint, Point endPoint)
         {
             DrawLine(startPoint, Point.CreateFor(endPoint.X, startPoint.Y));
             DrawLine(Point.CreateFor(startPoint.X, endPoint.Y), endPoint);
@@ -100,7 +100,7 @@ namespace CanvasPainter.Drawings
             DrawLine(Point.CreateFor(endPoint.X, startPoint.Y), endPoint);
         }
 
-        private void FloodFill(Point? point, char fillColorChar)
+        private void FloodFill(Point point, char fillColorChar)
         {
             if (!point.IsPointInBodyRange(Width, Height) || GetColorAt(point) != EmptyColor)
             {
@@ -115,7 +115,7 @@ namespace CanvasPainter.Drawings
             FloodFill(Point.CreateFor(point.X + 1, point.Y), fillColorChar);
         }
 
-        private void DrawHorizontalLine(Point? startPoint, Point? endPoint)
+        private void DrawHorizontalLine(Point startPoint, Point endPoint)
         {
             if (startPoint.X >= endPoint.X)
             {
@@ -127,7 +127,7 @@ namespace CanvasPainter.Drawings
             }
         }
 
-        private void DrawVerticalLine(Point? startPoint, Point? endPoint)
+        private void DrawVerticalLine(Point startPoint, Point endPoint)
         {
             if (startPoint.Y >= endPoint.Y)
             {
@@ -155,13 +155,21 @@ namespace CanvasPainter.Drawings
             }
         }
 
-        private char GetColorAt(Point? point)
+        private char GetColorAt(Point point)
         {
+            if (CanvasBody == null)
+            {
+                throw CanvasException.BecauseIsEmpty();
+            }
             return CanvasBody[point.X - 1, point.Y - 1];
         }
 
-        private void SetColorFor(Point? point, char color)
+        private void SetColorFor(Point point, char color)
         {
+            if (CanvasBody == null)
+            {
+                throw CanvasException.BecauseIsEmpty();
+            }
             CanvasBody[point.X - 1, point.Y - 1] = color;
         }
     }

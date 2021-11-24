@@ -6,8 +6,6 @@ namespace CanvasPainter.Testing.Messages
 {
     public class RectangleMessageTest
     {
-        private RectangleMessage RectangleMessage { get; set; }
-
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
         {
@@ -15,13 +13,13 @@ namespace CanvasPainter.Testing.Messages
             var inputParameters = new[] {"R", "14", "1", "18", "3"};
 
             // act
-            RectangleMessage = new RectangleMessage(inputParameters);
+            var rectangleMessage = new RectangleMessage(inputParameters);
 
             // assert
-            Assert.Equal(14, RectangleMessage.StartPoint.X);
-            Assert.Equal(18, RectangleMessage.EndPoint.X);
-            Assert.Equal(1, RectangleMessage.StartPoint.Y);
-            Assert.Equal(3, RectangleMessage.EndPoint.Y);
+            Assert.Equal(14, rectangleMessage.StartPoint.X);
+            Assert.Equal(18, rectangleMessage.EndPoint.X);
+            Assert.Equal(1, rectangleMessage.StartPoint.Y);
+            Assert.Equal(3, rectangleMessage.EndPoint.Y);
         }
 
         [Fact]
@@ -31,7 +29,7 @@ namespace CanvasPainter.Testing.Messages
             var inputParameters = new[] {"R", "1", "2", "6"};
 
             // act & assert
-            Assert.Throws<CanvasException>(() => RectangleMessage = new RectangleMessage(inputParameters));
+            Assert.Throws<CanvasException>(() => new RectangleMessage(inputParameters));
         }
     }
 }
