@@ -50,7 +50,7 @@ namespace CanvasPainter.Drawings
                     stringBuilder.Append(GetColorAt(Point.CreateFor(x, y)));
                 }
 
-                stringBuilder.Append("|\n");
+                stringBuilder.AppendLine("|");
             }
 
             stringBuilder.AppendLine(horizontalBorder);

@@ -23,7 +23,7 @@ namespace CanvasPainter.Applications
             {
                 try
                 {
-                    _applicationConsole.Write("Enter Commands: ");
+                    _applicationConsole.Write("Enter Command: ");
                     var inputValues = _applicationConsole.ReadLine();
                     var message = MessageFactory.CreateFor(inputValues);
 
