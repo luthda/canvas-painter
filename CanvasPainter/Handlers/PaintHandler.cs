@@ -23,7 +23,7 @@ namespace CanvasPainter.Handlers
                 Canvas = Canvas.Draw(message);
             }
 
-            return Canvas.DrawBorder();
+            return Canvas.ToString();
         }
     }
 }

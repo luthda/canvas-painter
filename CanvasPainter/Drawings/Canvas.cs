@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using CanvasPainter.Exceptions;
 using CanvasPainter.Messages;
@@ -9,9 +8,9 @@ namespace CanvasPainter.Drawings
     {
         private const char EmptyColor = ' ';
         private const char LineColor = 'x';
-        public int Width { get; }
-        public int Height { get; }
-        public char[,] CanvasBody { get; }
+        private int Width { get; }
+        private int Height { get; }
+        private char[,] CanvasBody { get; }
 
         private Canvas(CreateMessage createMessage)
         {
@@ -37,7 +36,7 @@ namespace CanvasPainter.Drawings
             return new Canvas(createMessage);
         }
 
-        public string DrawBorder()
+        public override string ToString()
         {
             var stringBuilder = new StringBuilder();
             var horizontalBorder = new string('-', Width + 2);
@@ -80,11 +79,17 @@ namespace CanvasPainter.Drawings
         {
             if (!startPoint.IsPointInBodyRange(Width, Height) || !endPoint.IsPointInBodyRange(Width, Height))
             {
-                throw CanvasException.BecauseCoordinateNotInCanvas();
+                throw CanvasException.BecauseCoordinateIsNotInCanvas();
             }
 
-            if (startPoint.X == endPoint.X) DrawVerticalLine(startPoint, endPoint);
-            else DrawHorizontalLine(startPoint, endPoint);
+            if (startPoint.X == endPoint.X)
+            {
+                DrawVerticalLine(startPoint, endPoint);
+            }
+            else
+            {
+                DrawHorizontalLine(startPoint, endPoint);
+            }
         }
 
         private void DrawRectangle(Point startPoint, Point endPoint)

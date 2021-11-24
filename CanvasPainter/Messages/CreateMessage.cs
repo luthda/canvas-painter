@@ -24,7 +24,7 @@ namespace CanvasPainter.Messages
 
             if (!(IsInLimitedArea(width) && IsInLimitedArea(height)))
             {
-                throw CanvasException.BecauseCoordinateNotInCanvas();
+                throw CanvasException.BecauseCoordinateIsNotInCanvas();
             }
 
             Width = width;

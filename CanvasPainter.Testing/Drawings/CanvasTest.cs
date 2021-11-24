@@ -12,22 +12,7 @@ namespace CanvasPainter.Testing.Drawings
         private Canvas Canvas { get; set; } = new EmptyCanvas();
 
         [Fact]
-        public void Initialize_WithValidParameters_ReturnsCanvas()
-        {
-            // arrange
-            var inputParameters = new[] {"C", "10", "9"};
-
-            // act
-            Canvas = Canvas.CreateFor(new CreateMessage(inputParameters));
-
-            // assert
-            Assert.Equal(10, Canvas.Width);
-            Assert.Equal(9, Canvas.Height);
-            Assert.Equal(90, Canvas.CanvasBody.Length);
-        }
-
-        [Fact]
-        public void AddBorder_ReturnsCanvasWithBorderAsString()
+        public void InitializeAndAToString_ReturnsCanvasWithBorderAsString()
         {
             // arrange
             var inputParameters = new[] {"C", "4", "2"};
@@ -40,7 +25,7 @@ namespace CanvasPainter.Testing.Drawings
             expectedString.AppendLine("------");
 
             // act
-            var actualCanvasString = Canvas.DrawBorder();
+            var actualCanvasString = Canvas.ToString();
 
             // assert
             Assert.Equal(expectedString.ToString(), actualCanvasString);
@@ -78,7 +63,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.Draw(lineCommand);
 
             // assert
-            Assert.Equal(expectedString.ToString(), Canvas.DrawBorder());
+            Assert.Equal(expectedString.ToString(), Canvas.ToString());
         }
 
         [Fact]
@@ -101,7 +86,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.Draw(lineCommand);
 
             // assert
-            Assert.Equal(expectedString.ToString(), Canvas.DrawBorder());
+            Assert.Equal(expectedString.ToString(), Canvas.ToString());
         }
 
         [Fact]
@@ -124,7 +109,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.Draw(lineCommand);
 
             // assert
-            Assert.Equal(expectedString.ToString(), Canvas.DrawBorder());
+            Assert.Equal(expectedString.ToString(), Canvas.ToString());
         }
 
         [Fact]
@@ -147,7 +132,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.Draw(lineCommand);
 
             // assert
-            Assert.Equal(expectedString.ToString(), Canvas.DrawBorder());
+            Assert.Equal(expectedString.ToString(), Canvas.ToString());
         }
 
         [Fact]
@@ -172,7 +157,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.Draw(rectangleCommand);
 
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas.DrawBorder());
+            Assert.Equal(stringBuilder.ToString(), Canvas.ToString());
         }
 
         [Fact]
@@ -185,7 +170,7 @@ namespace CanvasPainter.Testing.Drawings
             var rectangleCommand = new RectangleMessage(inputRectangleParameters);
 
             // act & assert
-            Assert.Throws<ArgumentException>(() => Canvas.Draw(rectangleCommand));
+            Assert.Throws<CanvasException>(() => Canvas.Draw(rectangleCommand));
         }
 
         [Fact]
@@ -209,7 +194,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.Draw(floodFillCommand);
 
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas.DrawBorder());
+            Assert.Equal(stringBuilder.ToString(), Canvas.ToString());
         }
 
         [Fact]
@@ -233,7 +218,7 @@ namespace CanvasPainter.Testing.Drawings
             Canvas = Canvas.Draw(floodFillCommand);
 
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas.DrawBorder());
+            Assert.Equal(stringBuilder.ToString(), Canvas.ToString());
         }
     }
 }

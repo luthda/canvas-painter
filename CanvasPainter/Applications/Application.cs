@@ -1,5 +1,3 @@
-using System;
-using System.Text;
 using CanvasPainter.Exceptions;
 using CanvasPainter.Handlers;
 using CanvasPainter.Messages;
@@ -33,7 +31,11 @@ namespace CanvasPainter.Applications
                     {
                         IsQuit = true;
                     }
-                    else _applicationConsole.Write(_paintHandler.HandleOn(message));
+                    else
+                    {
+                        _applicationConsole.Write(_paintHandler.HandleOn(message));
+                    }
+                       
                 }
                 catch (CanvasException ex)
                 {

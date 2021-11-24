@@ -13,14 +13,14 @@ namespace CanvasPainter.Exceptions
             return new CanvasException("Your input is not valid! Check which input is allowed for each command.");
         }
 
-        public static CanvasException BecauseCoordinateNotInCanvas()
+        public static CanvasException BecauseCoordinateIsNotInCanvas()
         {
-            return new CanvasException("Your coordination are not inside the canvas! Check your canvas size.");
+            return new CanvasException("Your coordinates are not inside the canvas! Check your canvas size.");
         }
 
         public static CanvasException BecauseCoordinatesAreNotALine()
         {
-            return new CanvasException("Your coordination have to be on a line to be drawn.");
+            return new CanvasException("Your coordinates have to be on a line to be drawn.");
         }
         
         public static CanvasException BecauseIsNotAValidCommand()

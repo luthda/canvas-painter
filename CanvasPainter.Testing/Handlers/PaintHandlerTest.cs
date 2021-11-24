@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using CanvasPainter.Drawings;
+using CanvasPainter.Exceptions;
 using CanvasPainter.Handlers;
 using CanvasPainter.Messages;
 using Xunit;
@@ -75,7 +77,7 @@ namespace CanvasPainter.Testing.Handlers
             var lineCommand = new LineMessage(inputLineParameters);
             
             // act & assert
-            Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(lineCommand));
+            Assert.Throws<CanvasException>(() => PaintHandler.HandleOn(lineCommand));
         }
 
         [Fact]
@@ -116,7 +118,7 @@ namespace CanvasPainter.Testing.Handlers
             var rectangleCommand = new RectangleMessage(inputLineParameters);
             
             // act & assert
-            Assert.Throws<ArgumentException>(() => PaintHandler.HandleOn(rectangleCommand));
+            Assert.Throws<CanvasException>(() => PaintHandler.HandleOn(rectangleCommand));
         }
 
         [Fact]
