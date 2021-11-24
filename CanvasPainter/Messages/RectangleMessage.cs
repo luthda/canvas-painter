@@ -5,8 +5,8 @@ namespace CanvasPainter.Messages
 {
     public class RectangleMessage : IMessage
     {
-        public Point StartPoint { get; private set; }
-        public Point EndPoint { get; private set; }
+        public Point? StartPoint { get; private set; }
+        public Point? EndPoint { get; private set; }
 
         public RectangleMessage(string[] inputParameters)
         {

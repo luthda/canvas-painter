@@ -100,7 +100,7 @@ namespace CanvasPainter.Drawings
             DrawLine(Point.CreateFor(endPoint.X, startPoint.Y), endPoint);
         }
 
-        private void FloodFill(Point point, char fillColorChar)
+        private void FloodFill(Point? point, char fillColorChar)
         {
             if (!point.IsPointInBodyRange(Width, Height) || GetColorAt(point) != EmptyColor)
             {
@@ -155,12 +155,12 @@ namespace CanvasPainter.Drawings
             }
         }
 
-        private char GetColorAt(Point point)
+        private char GetColorAt(Point? point)
         {
             return CanvasBody[point.X - 1, point.Y - 1];
         }
 
-        private void SetColorFor(Point point, char color)
+        private void SetColorFor(Point? point, char color)
         {
             CanvasBody[point.X - 1, point.Y - 1] = color;
         }

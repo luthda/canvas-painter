@@ -5,7 +5,7 @@ namespace CanvasPainter.Messages
 {
     public class FloodFillMessage : IMessage
     {
-        public Point ColorPoint { get; set; }
+        public Point? ColorPoint { get; set; }
         public char FillColor { get; set; }
 
         public FloodFillMessage(string[] inputParameters)
