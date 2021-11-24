@@ -6,7 +6,7 @@ namespace CanvasPainter.Messages
     public class LineMessage : IMessage
     {
         public Point StartPoint { get; private set; }
-        public Point EndPoint { get; private set;  }
+        public Point EndPoint { get; private set; }
 
         public LineMessage(string[] inputParameters)
         {

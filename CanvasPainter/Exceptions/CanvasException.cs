@@ -22,7 +22,7 @@ namespace CanvasPainter.Exceptions
         {
             return new CanvasException("Your coordinates have to be on a line to be drawn.");
         }
-        
+
         public static CanvasException BecauseIsNotAValidCommand()
         {
             return new CanvasException("This command is not allowed. Choose C, L, R, B or Q.");

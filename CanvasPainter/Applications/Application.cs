@@ -35,7 +35,6 @@ namespace CanvasPainter.Applications
                     {
                         _applicationConsole.Write(_paintHandler.HandleOn(message));
                     }
-                       
                 }
                 catch (CanvasException ex)
                 {

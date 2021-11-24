@@ -161,6 +161,7 @@ namespace CanvasPainter.Drawings
             {
                 throw CanvasException.BecauseIsEmpty();
             }
+
             return CanvasBody[point.X - 1, point.Y - 1];
         }
 
@@ -170,6 +171,7 @@ namespace CanvasPainter.Drawings
             {
                 throw CanvasException.BecauseIsEmpty();
             }
+
             CanvasBody[point.X - 1, point.Y - 1] = color;
         }
     }
