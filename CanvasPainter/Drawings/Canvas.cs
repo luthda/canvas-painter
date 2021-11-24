@@ -10,7 +10,7 @@ namespace CanvasPainter.Drawings
         private const char LineColor = 'x';
         private int Width { get; }
         private int Height { get; }
-        private char[,] CanvasBody { get; }
+        private char[,]? CanvasBody { get; }
 
         private Canvas(CreateMessage createMessage)
         {
@@ -75,7 +75,7 @@ namespace CanvasPainter.Drawings
             return (Canvas) MemberwiseClone();
         }
 
-        private void DrawLine(Point startPoint, Point endPoint)
+        private void DrawLine(Point? startPoint, Point? endPoint)
         {
             if (!startPoint.IsPointInBodyRange(Width, Height) || !endPoint.IsPointInBodyRange(Width, Height))
             {
@@ -92,7 +92,7 @@ namespace CanvasPainter.Drawings
             }
         }
 
-        private void DrawRectangle(Point startPoint, Point endPoint)
+        private void DrawRectangle(Point? startPoint, Point? endPoint)
         {
             DrawLine(startPoint, Point.CreateFor(endPoint.X, startPoint.Y));
             DrawLine(Point.CreateFor(startPoint.X, endPoint.Y), endPoint);
@@ -115,7 +115,7 @@ namespace CanvasPainter.Drawings
             FloodFill(Point.CreateFor(point.X + 1, point.Y), fillColorChar);
         }
 
-        private void DrawHorizontalLine(Point startPoint, Point endPoint)
+        private void DrawHorizontalLine(Point? startPoint, Point? endPoint)
         {
             if (startPoint.X >= endPoint.X)
             {
@@ -127,7 +127,7 @@ namespace CanvasPainter.Drawings
             }
         }
 
-        private void DrawVerticalLine(Point startPoint, Point endPoint)
+        private void DrawVerticalLine(Point? startPoint, Point? endPoint)
         {
             if (startPoint.Y >= endPoint.Y)
             {
