@@ -1,14 +1,14 @@
 using CanvasPainter.Drawings;
 using CanvasPainter.Exceptions;
 
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public class LineCommand : ICommand
+    public class LineMessage : IMessage
     {
         public Point StartPoint { get; private set; }
         public Point EndPoint { get; private set; }
 
-        public LineCommand(string[] inputParameters)
+        public LineMessage(string[] inputParameters)
         {
             ValidateAndSetProperties(inputParameters);
         }
@@ -19,12 +19,12 @@ namespace CanvasPainter.Commands
                   int.TryParse(inputParameters[2], out int y1) && int.TryParse(inputParameters[3], out int x2) &&
                   int.TryParse(inputParameters[4], out int y2)))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
 
             if (!(x1 == x2 || y1 == y2))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseCoordinatesAreNotALine();
             }
 
             StartPoint = Point.CreateFor(x1, y1);

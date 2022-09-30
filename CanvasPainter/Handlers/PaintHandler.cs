@@ -1,53 +1,29 @@
-using System;
-using System.Collections.Generic;
-using CanvasPainter.Commands;
 using CanvasPainter.Drawings;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Handlers
 {
-    public class PaintHandler : IHandler
+    public class PaintHandler
     {
         private Canvas Canvas { get; set; }
-        private Stack<Canvas> CanvasHistory { get; }
 
         public PaintHandler()
         {
             Canvas = new EmptyCanvas();
-            CanvasHistory = new Stack<Canvas>();
         }
 
-        public string HandleOn(ICommand command)
+        public string HandleOn(IMessage message)
         {
-            if (command.GetType() == typeof(CreateCommand))
+            if (message is CreateMessage createMessage)
             {
-                Canvas = Canvas.CreateFor((CreateCommand) command);
-            }
-            else if (command.GetType() == typeof(UndoCommand))
-            {
-                Canvas = PopFromCanvasHistory();
+                Canvas = Canvas.CreateFor(createMessage);
             }
             else
             {
-                PushToCanvasHistory();
-                Canvas = Canvas.Draw(command);
+                Canvas = Canvas.Draw(message);
             }
 
-            return Canvas.DrawBorder();
-        }
-        
-        private void PushToCanvasHistory()
-        {
-            CanvasHistory.Push(Canvas.Clone());
-        }
-
-        private Canvas PopFromCanvasHistory()
-        {
-            if (CanvasHistory.Count == 0)
-            {
-                throw new ArgumentException("Canvas history is empty!");
-            }
-            
-            return CanvasHistory.Pop();
+            return Canvas.ToString();
         }
     }
 }

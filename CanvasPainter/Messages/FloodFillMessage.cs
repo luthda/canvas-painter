@@ -1,14 +1,14 @@
 using CanvasPainter.Drawings;
 using CanvasPainter.Exceptions;
 
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public class FloodFillCommand : ICommand
+    public class FloodFillMessage : IMessage
     {
         public Point ColorPoint { get; set; }
         public char FillColor { get; set; }
 
-        public FloodFillCommand(string[] inputParameters)
+        public FloodFillMessage(string[] inputParameters)
         {
             ValidateAndSetProperties(inputParameters);
         }
@@ -18,7 +18,7 @@ namespace CanvasPainter.Commands
             if (!(inputParameters.Length == 4 && int.TryParse(inputParameters[1], out int x) &&
                   int.TryParse(inputParameters[2], out int y) && char.TryParse(inputParameters[3], out char color)))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
 
             ColorPoint = Point.CreateFor(x, y);

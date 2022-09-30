@@ -1,12 +1,11 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 using Xunit;
 
-namespace CanvasPainter.Testing.Commands
+namespace CanvasPainter.Testing.Messages
 {
-    public class FloodFillCommandTest
+    public class FloodFillMessageTest
     {
-        private FloodFillCommand FloodFillCommand { get; set; }
 
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
@@ -15,12 +14,12 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"B", "10", "3", "o"};
 
             // act
-            FloodFillCommand = new FloodFillCommand(inputParameters);
+            var floodFillMessage = new FloodFillMessage(inputParameters);
 
             // assert
-            Assert.Equal(10, FloodFillCommand.ColorPoint.X);
-            Assert.Equal(3, FloodFillCommand.ColorPoint.Y);
-            Assert.Equal('o', FloodFillCommand.FillColor);
+            Assert.Equal(10, floodFillMessage.ColorPoint.X);
+            Assert.Equal(3, floodFillMessage.ColorPoint.Y);
+            Assert.Equal('o', floodFillMessage.FillColor);
         }
 
         [Fact]
@@ -30,7 +29,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"B", "10", "2", "630"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));
+            Assert.Throws<CanvasException>(() => new FloodFillMessage(inputParameters));
         }
 
         [Fact]
@@ -40,7 +39,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"B", "10", "2"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => FloodFillCommand = new FloodFillCommand(inputParameters));
+            Assert.Throws<CanvasException>(() => new FloodFillMessage(inputParameters));
         }
     }
 }

@@ -1,13 +1,11 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 using Xunit;
 
-namespace CanvasPainter.Testing.Commands
+namespace CanvasPainter.Testing.Messages
 {
-    public class LineCommandTest
+    public class LineMessageTest
     {
-        private LineCommand LineCommand { get; set; }
-
         [Fact]
         public void ValidateAndSetProperties_WithValidParameters_SetsProperties()
         {
@@ -15,13 +13,13 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"L", "1", "2", "6", "2"};
 
             // act
-            LineCommand = new LineCommand(inputParameters);
+            var lineMessage = new LineMessage(inputParameters);
 
             // assert
-            Assert.Equal(1, LineCommand.StartPoint.X);
-            Assert.Equal(6, LineCommand.EndPoint.X);
-            Assert.Equal(2, LineCommand.StartPoint.Y);
-            Assert.Equal(2, LineCommand.EndPoint.Y);
+            Assert.Equal(1, lineMessage.StartPoint.X);
+            Assert.Equal(6, lineMessage.EndPoint.X);
+            Assert.Equal(2, lineMessage.StartPoint.Y);
+            Assert.Equal(2, lineMessage.EndPoint.Y);
         }
 
         [Fact]
@@ -31,7 +29,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"L", "1", "2", "6", "4"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => LineCommand = new LineCommand(inputParameters));
+            Assert.Throws<CanvasException>(() => new LineMessage(inputParameters));
         }
 
         [Fact]
@@ -41,7 +39,7 @@ namespace CanvasPainter.Testing.Commands
             var inputParameters = new[] {"L", "1", "2", "6"};
 
             // act & assert
-            Assert.Throws<ValidationException>(() => LineCommand = new LineCommand(inputParameters));
+            Assert.Throws<CanvasException>(() => new LineMessage(inputParameters));
         }
     }
 }

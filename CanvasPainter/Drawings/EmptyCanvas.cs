@@ -1,13 +1,13 @@
-using CanvasPainter.Commands;
 using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Drawings
 {
     public class EmptyCanvas : Canvas
     {
-        public override Canvas Draw(ICommand command)
+        public override Canvas Draw(IMessage message)
         {
-            throw CommandException.CreateInstance();
+            throw CanvasException.BecauseIsEmpty();
         }
     }
 }

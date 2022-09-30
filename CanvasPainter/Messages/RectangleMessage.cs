@@ -1,14 +1,14 @@
 using CanvasPainter.Drawings;
 using CanvasPainter.Exceptions;
 
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public class RectangleCommand : ICommand
+    public class RectangleMessage : IMessage
     {
         public Point StartPoint { get; private set; }
         public Point EndPoint { get; private set; }
 
-        public RectangleCommand(string[] inputParameters)
+        public RectangleMessage(string[] inputParameters)
         {
             ValidateAndSetProperties(inputParameters);
         }
@@ -19,7 +19,7 @@ namespace CanvasPainter.Commands
                   int.TryParse(inputParameters[2], out int y1) && int.TryParse(inputParameters[3], out int x2) &&
                   int.TryParse(inputParameters[4], out int y2)))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
 
             StartPoint = Point.CreateFor(x1, y1);

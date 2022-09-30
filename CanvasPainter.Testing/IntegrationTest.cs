@@ -1,14 +1,13 @@
 using System.Text;
-using CanvasPainter.Commands;
 using CanvasPainter.Handlers;
+using CanvasPainter.Messages;
 using Xunit;
 
 namespace CanvasPainter.Testing
 {
     public class IntegrationTest
     {
-        private readonly IHandler _paintHandler;
-        private string Canvas { get; set; }
+        private readonly PaintHandler _paintHandler;
 
         public IntegrationTest()
         {
@@ -30,11 +29,11 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var createCommand = CommandFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(createCommand);
+            var createCommand = MessageFactory.CreateFor(inputValues);
+            string canvas = _paintHandler.HandleOn(createCommand);
             
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("L 1 2 6 2");
@@ -48,11 +47,11 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var lineCommand = CommandFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(lineCommand);
+            var lineCommand = MessageFactory.CreateFor(inputValues);
+            canvas = _paintHandler.HandleOn(lineCommand);
            
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("L 6 3 6 4");
@@ -66,11 +65,11 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var verticalLineCommand = CommandFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(verticalLineCommand);
+            var verticalLineCommand = MessageFactory.CreateFor(inputValues);
+            canvas = _paintHandler.HandleOn(verticalLineCommand);
            
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("R 14 1 18 3");
@@ -84,11 +83,11 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var rectangleCommand = CommandFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(rectangleCommand);
+            var rectangleCommand = MessageFactory.CreateFor(inputValues);
+            canvas = _paintHandler.HandleOn(rectangleCommand);
             
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
             
             // arrange
             inputValues = new string("B 10 3 o");
@@ -102,11 +101,11 @@ namespace CanvasPainter.Testing
             stringBuilder.AppendLine("----------------------");
             
             // act
-            var floodFillCommand = CommandFactory.CreateFor(inputValues);
-            Canvas = _paintHandler.HandleOn(floodFillCommand);
+            var floodFillCommand = MessageFactory.CreateFor(inputValues);
+            canvas = _paintHandler.HandleOn(floodFillCommand);
 
             // assert
-            Assert.Equal(stringBuilder.ToString(), Canvas);
+            Assert.Equal(stringBuilder.ToString(), canvas);
         }
     }
 }

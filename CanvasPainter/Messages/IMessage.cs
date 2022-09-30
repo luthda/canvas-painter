@@ -1,6 +1,6 @@
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public interface ICommand
+    public interface IMessage
     {
         public void ValidateAndSetProperties(string[] inputParameters);
     }

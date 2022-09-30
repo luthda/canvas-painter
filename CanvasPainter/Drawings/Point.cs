@@ -1,6 +1,6 @@
 namespace CanvasPainter.Drawings
 {
-    public class Point
+    public readonly struct Point
     {
         public int X { get; }
         public int Y { get; }

@@ -1,6 +1,6 @@
-using System;
 using System.Text;
-using CanvasPainter.Commands;
+using CanvasPainter.Exceptions;
+using CanvasPainter.Messages;
 
 namespace CanvasPainter.Drawings
 {
@@ -8,14 +8,14 @@ namespace CanvasPainter.Drawings
     {
         private const char EmptyColor = ' ';
         private const char LineColor = 'x';
-        public int Width { get; }
-        public int Height { get; }
-        public char[,] CanvasBody { get; }
+        private int Width { get; }
+        private int Height { get; }
+        private char[,]? CanvasBody { get; }
 
-        private Canvas(CreateCommand command)
+        private Canvas(CreateMessage createMessage)
         {
-            Width = command.Width;
-            Height = command.Height;
+            Width = createMessage.Width;
+            Height = createMessage.Height;
             CanvasBody = new char[Width, Height];
 
             for (int x = 1; x <= Width; x++)
@@ -38,12 +38,12 @@ namespace CanvasPainter.Drawings
         {
         }
 
-        public static Canvas CreateFor(CreateCommand command)
+        public static Canvas CreateFor(CreateMessage createMessage)
         {
-            return new Canvas(command);
+            return new Canvas(createMessage);
         }
 
-        public string DrawBorder()
+        public override string ToString()
         {
             var stringBuilder = new StringBuilder();
             var horizontalBorder = new string('-', Width + 2);
@@ -57,31 +57,26 @@ namespace CanvasPainter.Drawings
                     stringBuilder.Append(GetColorAt(Point.CreateFor(x, y)));
                 }
 
-                stringBuilder.Append("|\n");
+                stringBuilder.AppendLine("|");
             }
 
             stringBuilder.AppendLine(horizontalBorder);
             return stringBuilder.ToString();
         }
 
-        public virtual Canvas Draw(ICommand command)
+        public virtual Canvas Draw(IMessage message)
         {
-            if (command.GetType() == typeof(LineCommand))
+            switch (message)
             {
-                var lineCommand = (LineCommand) command;
-                DrawLine(lineCommand.StartPoint, lineCommand.EndPoint);
-            }
-
-            if (command.GetType() == typeof(RectangleCommand))
-            {
-                var rectangleCommand = (RectangleCommand) command;
-                DrawRectangle(rectangleCommand.StartPoint, rectangleCommand.EndPoint);
-            }
-
-            if (command.GetType() == typeof(FloodFillCommand))
-            {
-                var floodFillCommand = (FloodFillCommand) command;
-                FloodFill(floodFillCommand.ColorPoint, floodFillCommand.FillColor);
+                case LineMessage lineMessage:
+                    DrawLine(lineMessage.StartPoint, lineMessage.EndPoint);
+                    break;
+                case RectangleMessage rectangleMessage:
+                    DrawRectangle(rectangleMessage.StartPoint, rectangleMessage.EndPoint);
+                    break;
+                case FloodFillMessage floodFillMessage:
+                    FloodFill(floodFillMessage.ColorPoint, floodFillMessage.FillColor);
+                    break;
             }
 
             return Clone();
@@ -106,12 +101,17 @@ namespace CanvasPainter.Drawings
         {
             if (!startPoint.IsPointInBodyRange(Width, Height) || !endPoint.IsPointInBodyRange(Width, Height))
             {
-                throw new ArgumentException(
-                    $"Your coordinate must be in canvas body area, width: {Width}, height: {Height}");
+                throw CanvasException.BecauseCoordinateIsNotInCanvas();
             }
 
-            if (startPoint.X == endPoint.X) DrawVerticalLine(startPoint, endPoint);
-            else DrawHorizontalLine(startPoint, endPoint);
+            if (startPoint.X == endPoint.X)
+            {
+                DrawVerticalLine(startPoint, endPoint);
+            }
+            else
+            {
+                DrawHorizontalLine(startPoint, endPoint);
+            }
         }
 
         private void DrawRectangle(Point startPoint, Point endPoint)
@@ -179,11 +179,21 @@ namespace CanvasPainter.Drawings
 
         private char GetColorAt(Point point)
         {
+            if (CanvasBody == null)
+            {
+                throw CanvasException.BecauseIsEmpty();
+            }
+
             return CanvasBody[point.X - 1, point.Y - 1];
         }
 
         private void SetColorFor(Point point, char color)
         {
+            if (CanvasBody == null)
+            {
+                throw CanvasException.BecauseIsEmpty();
+            }
+
             CanvasBody[point.X - 1, point.Y - 1] = color;
         }
     }

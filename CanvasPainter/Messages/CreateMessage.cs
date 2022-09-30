@@ -1,15 +1,15 @@
 using CanvasPainter.Exceptions;
 
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public class CreateCommand : ICommand
+    public class CreateMessage : IMessage
     {
         public int Width { get; private set; }
         public int Height { get; private set; }
         private const int UpperLimit = 50;
         private const int LowerLimit = 1;
 
-        public CreateCommand(string[] inputParameters)
+        public CreateMessage(string[] inputParameters)
         {
             ValidateAndSetProperties(inputParameters);
         }
@@ -19,16 +19,21 @@ namespace CanvasPainter.Commands
             if (!(inputParameters.Length == 3 && int.TryParse(inputParameters[1], out int width) &&
                   int.TryParse(inputParameters[2], out int height)))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
 
-            if (width < LowerLimit || width > UpperLimit && height < LowerLimit || height > UpperLimit)
+            if (!(IsInLimitedArea(width) && IsInLimitedArea(height)))
             {
-                throw ValidationException.CreateInstance();
+                throw CanvasException.BecauseCoordinateIsNotInCanvas();
             }
 
             Width = width;
             Height = height;
+        }
+
+        private bool IsInLimitedArea(int size)
+        {
+            return size >= LowerLimit && size <= UpperLimit;
         }
     }
 }

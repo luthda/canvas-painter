@@ -1,18 +1,19 @@
 using CanvasPainter.Exceptions;
 
-namespace CanvasPainter.Commands
+namespace CanvasPainter.Messages
 {
-    public class UndoCommand : ICommand
+    public class QuitMessage : IMessage
     {
-        public UndoCommand(string[] inputParameters)
+        public QuitMessage(string[] inputParameters)
         {
             ValidateAndSetProperties(inputParameters);
         }
+
         public void ValidateAndSetProperties(string[] inputParameters)
         {
             if (inputParameters.Length != 1)
             {
-                throw CommandException.CreateInstance();
+                throw CanvasException.BecauseOfInvalidInput();
             }
         }
     }
