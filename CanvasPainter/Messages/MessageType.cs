@@ -6,6 +6,7 @@ namespace CanvasPainter.Messages
         L,
         R,
         B,
-        Q
+        Q,
+        Z
     }
 }

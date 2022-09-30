@@ -169,7 +169,29 @@ namespace CanvasPainter.Testing.Handlers
             
             // assert
             Assert.Equal(stringBuilder.ToString(), actualCanvasString);
+        }
+
+        [Fact]
+        public void HandleOn_UndoCommand_RemovesFromHistoryAndAddsToCurrentState()
+        {
+            // arrange
+            var inputParameters = new[] {"C", "20", "4"};
+            var createCommand = new CreateCommand(inputParameters);
+            var createString = PaintHandler.HandleOn(createCommand);
+
+            var inputLineParameters = new[] {"L", "1", "2", "6", "2"};
+            var lineCommand = new LineCommand(inputLineParameters);
+            var lineCanvasString = PaintHandler.HandleOn(lineCommand);
+
+            var inputCommandParameters = new []{"Z"};
+            var undoCommand = new UndoCommand(inputCommandParameters);
             
+            // act
+            var undoString = PaintHandler.HandleOn(undoCommand);
+            
+            // assert
+            Assert.NotEqual(lineCanvasString, undoString);
+            Assert.Equal(createString, undoString);
         }
     }
 }
