@@ -120,18 +120,5 @@ namespace CanvasPainter.Testing.Messages
             // assert
             Assert.Equal(typeof(FloodFillMessage), floodFillCommand.GetType());
         }
-        
-        [Fact]
-        public void CreateFor_TypeZWithValidParameters_ReturnsUndoCommand()
-        {
-            // arrange
-            var inputParameters = new string("Z");
-            
-            // act
-            var undoCommand = CommandFactory.CreateFor(inputParameters);
-            
-            // assert
-            Assert.Equal(typeof(UndoCommand), undoCommand.GetType());
-        }
     }
 }
